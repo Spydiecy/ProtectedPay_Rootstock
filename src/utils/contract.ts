@@ -1,18 +1,7 @@
 import { ethers } from 'ethers';
 
 const CONTRACT_ADDRESSES = {
-	12227332: '0xF93132d75c20EfeD556EC2Bc5aC777750665D3a9', // NeoX Testnet
-	656476: '0x03c4fb7563e593ca0625C1c64959AC56081785cE', // EduChain Testnet
-	41923: '0x5bA4CB3929C75DF47B8b5E6ca6c7414a5E1a3DB0', // Educhain Mainnet
-	1001: '0xca36dd890f987edce1d6d7c74fb9df627c216bf6', // KAIA Testnet
-	41: '0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6', // Telos Testnet
-	28122024: '0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6', // Ancient8 Testnet
-	5003: '0x74689f77e03D8213DF5037b681F05b80bAAe3504', // Mantle Testnet
-	59141: '0xd150d34976Ac00D5e892aDFE565ba47de11c2656', // Linea Testnet
-	4157: '0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6', // CrossFi Testnet
-	66665: '0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6', // Creator Testnet
-	5201420: '0x186a621d17819788c9aa170065ff3bbEEF37E7B7', // Electroneum Testnet
-	52014: '0xC27106b03AadbFFec555C64F461784fCE850A51b', // Electroneum Mainnet
+	1328: '0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6', // Sei Testnet
 } as const;
   
 const CONTRACT_ABI = [
@@ -1156,7 +1145,7 @@ interface TransferEvent {
   const getContractAddress = async (signer: ethers.Signer) => {
 	const chainId = await signer.getChainId();
 	return CONTRACT_ADDRESSES[chainId as keyof typeof CONTRACT_ADDRESSES] 
-	  || CONTRACT_ADDRESSES[656476]; // Default to Educhain if chain not found
+	  || CONTRACT_ADDRESSES[1328]; // Default to Sei Testnet if chain not found
   };
   
   // Contract instance getter with chain awareness
@@ -1179,9 +1168,41 @@ interface TransferEvent {
   
   // User Registration and Management
   export const registerUsername = async (signer: ethers.Signer, username: string) => {
-	const contract = await getContract(signer);
-	const tx = await contract.registerUsername(username);
-	await tx.wait();
+    try {
+      const contract = await getContract(signer);
+      
+      // Set gas explicitly for better compatibility with Sei wallet
+      const gasEstimate = await contract.estimateGas.registerUsername(username)
+        .catch((err: any) => {
+          console.warn('Gas estimation failed, using default gas limit', err);
+          return ethers.BigNumber.from('300000'); // Default gas limit if estimation fails
+        });
+      
+      // Add 20% buffer to gas estimate
+      const gasLimit = gasEstimate.mul(12).div(10);
+      
+      console.log(`🔄 Registering username '${username}' with gas limit ${gasLimit.toString()}`);
+      
+      const tx = await contract.registerUsername(username, {
+        gasLimit: gasLimit
+      });
+      
+      console.log('Transaction sent:', tx.hash);
+      const receipt = await tx.wait(1); // Wait for 1 confirmation
+      console.log('Username registered successfully:', receipt.transactionHash);
+      
+      return { success: true, data: receipt };
+    } catch (error: any) {
+      console.error('Error registering username:', error);
+      // Provide more detailed error information
+      return { 
+        success: false, 
+        error,
+        message: error.message || 'Unknown error occurred',
+        code: error.code,
+        data: error.data || {}
+      };
+    }
   };
   
   export const getUserByUsername = async (signer: ethers.Signer, username: string) => {
@@ -1190,8 +1211,22 @@ interface TransferEvent {
   };
   
   export const getUserByAddress = async (signer: ethers.Signer, address: string) => {
-	const contract = await getContract(signer);
-	return await contract.getUserByAddress(address);
+	try {
+	  const contract = await getContract(signer);
+	  const user = await contract.getUserByAddress(address);
+	  return { success: true, data: user };
+	} catch (error: any) {
+	  console.error('Error getting user by address:', error);
+	  // If this is a "no such user" error, it's not really an error, just return empty data
+	  if (error.message && (error.message.includes('no username') || error.message.includes('not found'))) {
+		return { success: true, data: { username: '', transferIds: [], groupPaymentIds: [], participatedGroupPayments: [], savingsPotIds: [] } };
+	  }
+	  return { 
+		success: false, 
+		error,
+		message: error.message || 'Unknown error occurred'
+	  };
+	}
   };
   
   export const getUserProfile = async (signer: ethers.Signer, userAddress: string): Promise<UserProfile> => {
@@ -1539,22 +1574,16 @@ interface TransferEvent {
   
   export const getChainNativeCurrency = (chainId: number) => {
 	switch (chainId) {
-	  case 12227332:
+	  case 1328:
 		return {
-		  name: 'GAS',
-		  symbol: 'GAS',
-		  decimals: 18
-		};
-	  case 656476:
-		return {
-		  name: 'EDU',
-		  symbol: 'EDU',
+		  name: 'SEI',
+		  symbol: 'SEI',
 		  decimals: 18
 		};
 	  default:
 		return {
-		  name: 'GAS',
-		  symbol: 'GAS',
+		  name: 'SEI',
+		  symbol: 'SEI',
 		  decimals: 18
 		};
 	}
@@ -1562,12 +1591,10 @@ interface TransferEvent {
   
   export const getExplorerUrl = (chainId: number) => {
 	switch (chainId) {
-	  case 12227332:
-		return 'https://xt4scan.ngd.network/';
-	  case 656476:
-		return 'https://opencampus-codex.blockscout.com/';
+	  case 1328:
+		return 'https://seitrace.com/';
 	  default:
-		return 'https://xt4scan.ngd.network/';
+		return 'https://seitrace.com/';
 	}
   };
   

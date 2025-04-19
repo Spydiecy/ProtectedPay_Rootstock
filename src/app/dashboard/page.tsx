@@ -19,6 +19,8 @@ import {
 } from '@/utils/contract'
 import { ethers } from 'ethers';
 import { useChain } from '@/hooks/useChain';
+import SeiWalletInfo from '@/components/SeiWalletInfo';
+import RegisterUsernameModal from '@/components/RegisterUsernameModal';
 
 // Animation variants
 const fadeIn = {
@@ -55,6 +57,7 @@ export default function DashboardPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [recentActivity, setRecentActivity] = useState<Activity[]>([])
   const [username, setUsername] = useState<string>('');
+  const [isUsernameModalOpen, setIsUsernameModalOpen] = useState(false);
 
   // Fetch wallet balance and activity
   useEffect(() => {
@@ -68,9 +71,13 @@ export default function DashboardPage() {
 
         // Get username if available
         try {
-          const userInfo = await getUserByAddress(signer, address);
-          if (userInfo && userInfo !== "0x0000000000000000000000000000000000000000") {
-            setUsername(userInfo);
+          const userInfoResult = await getUserByAddress(signer, address);
+          if (userInfoResult.success && userInfoResult.data) {
+            // Check if username exists and is not empty
+            if (userInfoResult.data.username && userInfoResult.data.username !== "0x0000000000000000000000000000000000000000") {
+              // We just need the username string, not the whole object
+              setUsername(userInfoResult.data.username);
+            }
           }
         } catch (err) {
           console.error('Error fetching username:', err);
@@ -260,11 +267,23 @@ export default function DashboardPage() {
                 <div className="text-3xl font-bold text-[rgb(var(--foreground))]">
                   {balance} {nativeToken}
                 </div>
-                {username && (
+                {username ? (
                   <div className="text-sm text-[rgb(var(--muted-foreground))] mt-1">
                     Username: <span className="text-[rgb(var(--primary))]">@{username}</span>
                   </div>
+                ) : (
+                  <button 
+                    onClick={() => setIsUsernameModalOpen(true)}
+                    className="text-sm text-[rgb(var(--primary))] mt-1 flex items-center hover:underline"
+                  >
+                    <span>Register Username</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 ml-1">
+                      <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                  </button>
                 )}
+                {/* Display Sei Address */}
+                <SeiWalletInfo evmAddress={address} />
               </div>
               
               <div className="flex flex-wrap gap-3 mt-4 sm:mt-0">
@@ -377,6 +396,16 @@ export default function DashboardPage() {
           </motion.section>
         </>
       )}
+      
+      {/* Register Username Modal */}
+      <RegisterUsernameModal 
+        isOpen={isUsernameModalOpen} 
+        onClose={() => setIsUsernameModalOpen(false)} 
+        onSuccess={(newUsername) => {
+          setUsername(newUsername);
+          setIsUsernameModalOpen(false);
+        }}
+      />
     </div>
   )
 }

@@ -5,7 +5,7 @@
   
   <h3>Smart. Secure Crypto Transfers</h3>
   
-  <p>A revolutionary DeFi platform for secure transfers, group payments, and smart savings across multiple blockchains.</p>
+  <p>A revolutionary DeFi platform for secure transfers, group payments, and smart savings on Sei Network.</p>
 </div>
 
 ## 📋 Contents
@@ -26,7 +26,7 @@
 <img align="right" src="https://github.com/user-attachments/assets/bdb20bd8-fa93-488a-b720-46615b9918de" width="350px">
 
 - **Escrow-Like Protection**: Funds remain secure until claimed by recipient
-- **Multi-Chain Support**: Send assets seamlessly across different blockchains
+- **Sei Network Support**: Send assets seamlessly on the Sei blockchain
 - **Easy Identification**: Transfer using usernames instead of complex addresses
 - **Customizable Remarks**: Add notes to help identify your transfers
 - **Refund Safety Net**: Easily recover unclaimed funds
@@ -40,7 +40,7 @@
 <img align="right" src="https://github.com/user-attachments/assets/56141ff7-ad4b-4a1e-bfac-5abdd92b22a9" width="350px">
 
 - **Split Expenses Easily**: Divide costs among friends or colleagues
-- **Cross-Chain Contributors**: Accept payments from any supported blockchain
+- **Simple Contributors**: Accept payments from any user on the Sei network
 - **Automatic Distribution**: Funds released when target amount is reached
 - **Real-Time Tracking**: Monitor contributions as they happen
 - **Transparent History**: View all group payment activity

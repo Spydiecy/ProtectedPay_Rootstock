@@ -14,6 +14,10 @@ import {
   darkTheme 
 } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
+// Import Sei Global Wallet for EIP-6963 discovery
+import '@sei-js/sei-global-wallet/eip6963';
+// Import our Sei wallet adapter
+import { createSeiWalletAdapter } from '@/utils/seiWalletProvider';
 
 type ExtendedProvider = ethers.providers.ExternalProvider & {
   on: (event: string, callback: (...args: unknown[]) => void) => void;
@@ -22,273 +26,33 @@ type ExtendedProvider = ethers.providers.ExternalProvider & {
 };
 
 // Define chains
-const neoXTestnet = {
-  id: 12227332,
-  name: 'NeoX Testnet',
-  network: 'neoxtestnet',
+const seiTestnet = {
+  id: 1328,
+  name: 'Sei Testnet',
+  network: 'sei-testnet',
   nativeCurrency: {
     decimals: 18,
-    name: 'GAS',
-    symbol: 'GAS',
+    name: 'SEI',
+    symbol: 'SEI',
   },
   rpcUrls: {
     default: {
-      http: ['https://neoxt4seed1.ngd.network/']
+      http: ['https://evm-rpc-testnet.sei-apis.com']
     },
     public: {
-      http: ['https://neoxt4seed1.ngd.network/']
+      http: ['https://evm-rpc-testnet.sei-apis.com']
     }
   },
   blockExplorers: {
     default: {
-      name: 'NeoX Scan',
-      url: 'https://xt4scan.ngd.network/'
+      name: 'Sei Trace',
+      url: 'https://seitrace.com'
     }
   },
   testnet: true,
 } as const;
 
-const eduChainMainnet = {
-  id: 41923,
-  name: 'EDU Chain',
-  network: 'educhain',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'EDU',
-    symbol: 'EDU',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://rpc.edu-chain.raas.gelato.cloud']
-    },
-    public: {
-      http: ['https://rpc.edu-chain.raas.gelato.cloud']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'EDU Chain Explorer',
-      url: 'https://educhain.blockscout.com'
-    }
-  },
-  testnet: false,
-} as const;
-
-const eduChainTestnet = {
-  id: 656476,
-  name: 'EDU Chain Testnet',
-  network: 'educhaintestnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'EDU',
-    symbol: 'EDU',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://open-campus-codex-sepolia.drpc.org/']
-    },
-    public: {
-      http: ['https://open-campus-codex-sepolia.drpc.org/']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'EDU Chain Explorer',
-      url: 'https://opencampus-codex.blockscout.com/'
-    }
-  },
-  testnet: true,
-} as const;
-
-const kaiatestnet = {
-  id: 1001,
-  hexId: '0x3E9',
-  name: 'KAIA Testnet',
-  network: 'kaiatestnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'KAIA',
-    symbol: 'KAIA',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://kaia-kairos.blockpi.network/v1/rpc/public']
-    },
-    public: {
-      http: ['https://kaia-kairos.blockpi.network/v1/rpc/public']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'KAIA Testnet Explorer',
-      url: 'https://kairos.kaiascope.com/'
-    }
-  },
-  testnet: true,
-} as const;
-
-const ancient8Testnet = {
-  id: 28122024,
-  hexId: '0x1AD1BA8',
-  name: 'Ancient8 Testnet',
-  network: 'ancient8testnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'ETH',
-    symbol: 'ETH',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://rpcv2-testnet.ancient8.gg/']
-    },
-    public: {
-      http: ['https://rpcv2-testnet.ancient8.gg/']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'Ancient8 Testnet Explorer',
-      url: 'https://ancient8.testnet.routescan.io/'
-    }
-  },
-  testnet: true,
-} as const;
-
-const mantleSepoliaTestnet = {
-  id: 5003,
-  hexId: '0x138B',
-  name: 'Mantle Sepolia Testnet',
-  network: 'mantlesepoliatestnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'MNT',
-    symbol: 'MNT',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://rpc.sepolia.mantle.xyz']
-    },
-    public: {
-      http: ['https://rpc.sepolia.mantle.xyz']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'Mantle Sepolia Testnet Explorer',
-      url: 'https://explorer.sepolia.mantle.xyz/'
-    }
-  },
-  testnet: true,
-} as const;
-
-const creatorChainTestnet = {
-  id: 66665,
-  name: 'Creator Chain Testnet',
-  network: 'creatorchaintestnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'CETH',
-    symbol: 'CETH',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://66665.rpc.thirdweb.com']
-    },
-    public: {
-      http: ['https://66665.rpc.thirdweb.com']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'Creator Chain Explorer',
-      url: 'https://explorer.creatorchain.io'
-    }
-  },
-  testnet: true,
-} as const;
-
-const lineaSepoliaTestnet = {
-  id: 59141,
-  hexId: '0xE705',
-  name: 'Linea Sepolia Testnet',
-  network: 'lineasepoliatestnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'LineaETH',
-    symbol: 'LineaETH',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://linea-sepolia.infura.io']
-    },
-    public: {
-      http: ['https://linea-sepolia.infura.io']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'Linea Sepolia Explorer',
-      url: 'https://sepolia.lineascan.build'
-    }
-  },
-  testnet: true,
-} as const;
-
-const electroneumMainnet = {
-  id: 52014,
-  hexId: '0xCB2E',
-  name: 'Electroneum Mainnet',
-  network: 'electroneummainnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'ETN',
-    symbol: 'ETN',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://rpc.ankr.com/electroneum']
-    },
-    public: {
-      http: ['https://rpc.ankr.com/electroneum']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'Electroneum Explorer',
-      url: 'https://blockexplorer.electroneum.com/'
-    }
-  },
-  testnet: false,
-} as const;
-
-const electroneumTestnet = {
-  id: 5201420,
-  hexId: '0x4F5E0C',
-  name: 'Electroneum Testnet',
-  network: 'electroneumtestnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'ETN',
-    symbol: 'ETN',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://rpc.ankr.com/electroneum_testnet']
-    },
-    public: {
-      http: ['https://rpc.ankr.com/electroneum_testnet']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'Electroneum Testnet Explorer',
-      url: 'https://blockexplorer.thesecurityteam.rocks/'
-    }
-  },
-  testnet: true,
-} as const;
-
-const chains = [electroneumMainnet, electroneumTestnet, neoXTestnet, eduChainTestnet, kaiatestnet, ancient8Testnet, mantleSepoliaTestnet, lineaSepoliaTestnet, creatorChainTestnet, eduChainMainnet] as const; 
+const chains = [seiTestnet] as const; 
 
 const projectId = 'b8ad206ba9492e6096fa0aa0f868586c';
 
@@ -308,16 +72,7 @@ const wagmiConfig = createConfig({
   connectors,
   chains,
   transports: {
-    [electroneumMainnet.id]: http(),
-    [electroneumTestnet.id]: http(),
-    [eduChainTestnet.id]: http(),
-    [ancient8Testnet.id]: http(),
-    [neoXTestnet.id]: http(),
-    [kaiatestnet.id]: http(),
-    [mantleSepoliaTestnet.id]: http(),
-    [lineaSepoliaTestnet.id]: http(),
-    [creatorChainTestnet.id]: http(),
-    [eduChainMainnet.id]: http(),
+    [seiTestnet.id]: http(),
   },
 });
 
@@ -361,18 +116,60 @@ function WalletState({ children }: { children: ReactNode }) {
     const initializeWallet = async () => {
       if (typeof window !== 'undefined' && window.ethereum && address) {
         try {
-          const provider = new ethers.providers.Web3Provider(
-            window.ethereum as unknown as ExtendedProvider
+          // Detect if this is Sei Global Wallet
+          const isSeiGlobalWallet = Boolean(
+            window.ethereum.isSei || 
+            window.ethereum.isSeiWallet || 
+            (window.ethereum.providers && 
+            window.ethereum.providers.some((p: any) => p.isSei || p.isSeiWallet))
           );
           
-          const signer = provider.getSigner();
+          let signer: ethers.Signer;
+          let balance: string = '0.00';
           
-          let balance: string;
-          if (wagmiBalance) {
-            balance = ethers.utils.formatEther(wagmiBalance.value.toString());
+          if (isSeiGlobalWallet) {
+            console.log('🌟 Sei Global Wallet detected, using specialized adapter');
+            // Use our specialized adapter for Sei Global Wallet
+            const seiAdapter = createSeiWalletAdapter(window.ethereum, address);
+            signer = seiAdapter.getSigner();
+            
+            try {
+              // Get balance using the adapter's safe method
+              balance = await seiAdapter.getBalance();
+            } catch (balanceError) {
+              console.warn('Error getting Sei wallet balance, using wagmi balance');
+              if (wagmiBalance) {
+                balance = ethers.utils.formatEther(wagmiBalance.value.toString());
+              }
+            }
           } else {
-            const ethersBalance = await provider.getBalance(address);
-            balance = ethers.utils.formatEther(ethersBalance);
+            // Standard wallet implementation
+            const provider = new ethers.providers.Web3Provider(
+              window.ethereum as unknown as ExtendedProvider, 
+              'any' // Set this to 'any' to prevent network-related issues
+            );
+            
+            try {
+              signer = provider.getSigner();
+            } catch (signerError) {
+              console.warn('Could not get standard signer, using fallback', signerError);
+              const standardSigner = provider.getSigner();
+              signer = standardSigner;
+              
+              // Override the getAddress method if needed
+              (signer as any).getAddress = () => Promise.resolve(address as string);
+            }
+            
+            if (wagmiBalance) {
+              balance = ethers.utils.formatEther(wagmiBalance.value.toString());
+            } else {
+              try {
+                const ethersBalance = await provider.getBalance(address);
+                balance = ethers.utils.formatEther(ethersBalance);
+              } catch (balanceError) {
+                console.warn('Error getting balance, using 0', balanceError);
+              }
+            }
           }
           
           setState({

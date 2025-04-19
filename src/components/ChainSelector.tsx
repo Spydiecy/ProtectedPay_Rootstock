@@ -16,94 +16,13 @@ export interface ChainInfo {
 
 export const supportedChains: ChainInfo[] = [
   {
-    id: 52014,
-    hexId: '0xCB2E',
-    name: 'Electroneum Mainnet',
-    icon: '/chains/electroneum.png',
-    symbol: 'ETN',
-    rpcUrl: 'https://rpc.ankr.com/electroneum',
-    blockExplorerUrl: 'https://blockexplorer.electroneum.com/'
-  },
-  {
-    id: 5201420,
-    hexId: '0x4F5E0C',
-    name: 'Electroneum Testnet',
-    icon: '/chains/electroneum.png',
-    symbol: 'ETN',
-    rpcUrl: 'https://rpc.ankr.com/electroneum_testnet',
-    blockExplorerUrl: 'https://blockexplorer.thesecurityteam.rocks/'
-  },
-  {
-    id: 41923,
-    hexId: '0xA3C3',
-    name: 'EDU Chain Mainnet',
-    icon: '/chains/educhain.png',
-    symbol: 'EDU',
-    rpcUrl: 'https://rpc.edu-chain.raas.gelato.cloud',
-    blockExplorerUrl: 'https://educhain.blockscout.com/'
-  },
-  {
-    id: 656476,
-    hexId: '0xA045C',
-    name: 'EDU Chain Testnet',
-    icon: '/chains/educhain.png',
-    symbol: 'EDU',
-    rpcUrl: 'https://open-campus-codex-sepolia.drpc.org/',
-    blockExplorerUrl: 'https://opencampus-codex.blockscout.com/'
-  },
-  {
-    id: 28122024,
-    hexId: '0x1AD1BA8',
-    name: 'Ancient8 Testnet',
-    icon: '/chains/ancient8.png',
-    symbol: 'ETH',
-    rpcUrl: 'https://rpcv2-testnet.ancient8.gg/',
-    blockExplorerUrl: 'https://ancient8.testnet.routescan.io/',
-  },
-  {
-    id: 12227332,
-    hexId: '0xBA9304',
-    name: 'NeoX Testnet',
-    icon: '/chains/neox.png',
-    symbol: 'GAS',
-    rpcUrl: 'https://neoxt4seed1.ngd.network/',
-    blockExplorerUrl: 'https://xt4scan.ngd.network/'
-  },
-  {
-    id: 5003,
-    hexId: '0x138B',
-    name: 'Mantle Sepolia Testnet',
-    icon: '/chains/mantle.png',
-    symbol: 'MNT',
-    rpcUrl: 'https://rpc.sepolia.mantle.xyz',
-    blockExplorerUrl: 'https://explorer.sepolia.mantle.xyz'
-  },
-  {
-    id: 1001,
-    hexId: '0x3E9',
-    name: 'KAIA Testnet',
-    icon: '/chains/kaia.png',
-    symbol: 'KAIA',
-    rpcUrl: 'https://kaia-kairos.blockpi.network/v1/rpc/public',
-    blockExplorerUrl: 'https://kairos.kaiascope.com/',
-  },
-  {
-    id: 59141,
-    hexId: '0xE705',
-    name: 'Linea Sepolia',
-    icon: '/chains/linea.png',
-    symbol: 'LineaETH',
-    rpcUrl: 'https://linea-sepolia.infura.io',
-    blockExplorerUrl: 'https://sepolia.lineascan.build'
-  },
-  {
-    id: 66665,
-    hexId: '0x10469',
-    name: 'Creator Chain Testnet',
-    icon: '/chains/creator.png',
-    symbol: 'CETH',
-    rpcUrl: 'https://66665.rpc.thirdweb.com',
-    blockExplorerUrl: 'https://explorer.creatorchain.io'
+    id: 1328,
+    hexId: '0x530',
+    name: 'Sei Testnet',
+    icon: '/chains/sei.png',
+    symbol: 'SEI',
+    rpcUrl: 'https://evm-rpc-testnet.sei-apis.com',
+    blockExplorerUrl: 'https://seitrace.com'
   },
 ] as const
 
