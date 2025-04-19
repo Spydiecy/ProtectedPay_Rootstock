@@ -8,7 +8,8 @@ import {
   BanknotesIcon,
   ClockIcon,
   ShieldCheckIcon,
-  UserCircleIcon
+  UserCircleIcon,
+  QrCodeIcon
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useAccount } from 'wagmi'
@@ -21,6 +22,7 @@ import { ethers } from 'ethers';
 import { useChain } from '@/hooks/useChain';
 import SeiWalletInfo from '@/components/SeiWalletInfo';
 import RegisterUsernameModal from '@/components/RegisterUsernameModal';
+import QRModal from '@/components/QRModal';
 
 // Animation variants
 const fadeIn = {
@@ -58,6 +60,7 @@ export default function DashboardPage() {
   const [recentActivity, setRecentActivity] = useState<Activity[]>([])
   const [username, setUsername] = useState<string>('');
   const [isUsernameModalOpen, setIsUsernameModalOpen] = useState(false);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
 
   // Fetch wallet balance and activity
   useEffect(() => {
@@ -283,21 +286,13 @@ export default function DashboardPage() {
               </div>
               
               <div className="flex flex-wrap gap-3 mt-4 sm:mt-0">
-                <Link 
-                  href="/dashboard/transfer" 
+                <button
+                  onClick={() => setIsQRModalOpen(true)}
                   className="btn-primary flex items-center px-4 py-2 rounded-xl"
                 >
-                  <ArrowRightIcon className="w-4 h-4 mr-2" />
-                  <span>Send</span>
-                </Link>
-                
-                <Link 
-                  href="/dashboard/group-payments" 
-                  className="btn-outline flex items-center px-4 py-2 rounded-xl border border-[rgb(var(--border))]"
-                >
-                  <UsersIcon className="w-4 h-4 mr-2" />
-                  <span>Group Pay</span>
-                </Link>
+                  <QrCodeIcon className="w-4 h-4 mr-2" />
+                  <span>My QR Code</span>
+                </button>
               </div>
             </div>
           </motion.div>
@@ -401,6 +396,14 @@ export default function DashboardPage() {
           setUsername(newUsername);
           setIsUsernameModalOpen(false);
         }}
+      />
+      
+      {/* QR Code Modal */}
+      <QRModal
+        isOpen={isQRModalOpen}
+        onClose={() => setIsQRModalOpen(false)}
+        username={username}
+        address={address || ''}
       />
     </div>
   )
