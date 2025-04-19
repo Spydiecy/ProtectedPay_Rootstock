@@ -1168,41 +1168,9 @@ interface TransferEvent {
   
   // User Registration and Management
   export const registerUsername = async (signer: ethers.Signer, username: string) => {
-    try {
-      const contract = await getContract(signer);
-      
-      // Set gas explicitly for better compatibility with Sei wallet
-      const gasEstimate = await contract.estimateGas.registerUsername(username)
-        .catch((err: any) => {
-          console.warn('Gas estimation failed, using default gas limit', err);
-          return ethers.BigNumber.from('300000'); // Default gas limit if estimation fails
-        });
-      
-      // Add 20% buffer to gas estimate
-      const gasLimit = gasEstimate.mul(12).div(10);
-      
-      console.log(`🔄 Registering username '${username}' with gas limit ${gasLimit.toString()}`);
-      
-      const tx = await contract.registerUsername(username, {
-        gasLimit: gasLimit
-      });
-      
-      console.log('Transaction sent:', tx.hash);
-      const receipt = await tx.wait(1); // Wait for 1 confirmation
-      console.log('Username registered successfully:', receipt.transactionHash);
-      
-      return { success: true, data: receipt };
-    } catch (error: any) {
-      console.error('Error registering username:', error);
-      // Provide more detailed error information
-      return { 
-        success: false, 
-        error,
-        message: error.message || 'Unknown error occurred',
-        code: error.code,
-        data: error.data || {}
-      };
-    }
+	const contract = await getContract(signer);
+	const tx = await contract.registerUsername(username);
+	await tx.wait();
   };
   
   export const getUserByUsername = async (signer: ethers.Signer, username: string) => {
@@ -1211,22 +1179,8 @@ interface TransferEvent {
   };
   
   export const getUserByAddress = async (signer: ethers.Signer, address: string) => {
-	try {
-	  const contract = await getContract(signer);
-	  const user = await contract.getUserByAddress(address);
-	  return { success: true, data: user };
-	} catch (error: any) {
-	  console.error('Error getting user by address:', error);
-	  // If this is a "no such user" error, it's not really an error, just return empty data
-	  if (error.message && (error.message.includes('no username') || error.message.includes('not found'))) {
-		return { success: true, data: { username: '', transferIds: [], groupPaymentIds: [], participatedGroupPayments: [], savingsPotIds: [] } };
-	  }
-	  return { 
-		success: false, 
-		error,
-		message: error.message || 'Unknown error occurred'
-	  };
-	}
+	const contract = await getContract(signer);
+	return await contract.getUserByAddress(address);
   };
   
   export const getUserProfile = async (signer: ethers.Signer, userAddress: string): Promise<UserProfile> => {

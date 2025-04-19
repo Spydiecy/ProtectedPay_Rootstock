@@ -71,13 +71,9 @@ export default function DashboardPage() {
 
         // Get username if available
         try {
-          const userInfoResult = await getUserByAddress(signer, address);
-          if (userInfoResult.success && userInfoResult.data) {
-            // Check if username exists and is not empty
-            if (userInfoResult.data.username && userInfoResult.data.username !== "0x0000000000000000000000000000000000000000") {
-              // We just need the username string, not the whole object
-              setUsername(userInfoResult.data.username);
-            }
+          const userInfo = await getUserByAddress(signer, address);
+          if (userInfo && userInfo !== "0x0000000000000000000000000000000000000000") {
+            setUsername(userInfo);
           }
         } catch (err) {
           console.error('Error fetching username:', err);

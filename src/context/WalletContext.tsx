@@ -16,8 +16,6 @@ import {
 import '@rainbow-me/rainbowkit/styles.css';
 // Import Sei Global Wallet for EIP-6963 discovery
 import '@sei-js/sei-global-wallet/eip6963';
-// Import our Sei wallet adapter
-import { createSeiWalletAdapter } from '@/utils/seiWalletProvider';
 
 type ExtendedProvider = ethers.providers.ExternalProvider & {
   on: (event: string, callback: (...args: unknown[]) => void) => void;
@@ -116,59 +114,36 @@ function WalletState({ children }: { children: ReactNode }) {
     const initializeWallet = async () => {
       if (typeof window !== 'undefined' && window.ethereum && address) {
         try {
-          // Detect if this is Sei Global Wallet
-          const isSeiGlobalWallet = Boolean(
-            window.ethereum.isSei || 
-            window.ethereum.isSeiWallet || 
-            (window.ethereum.providers && 
-            window.ethereum.providers.some((p: any) => p.isSei || p.isSeiWallet))
+          const provider = new ethers.providers.Web3Provider(
+            window.ethereum as unknown as ExtendedProvider, 
+            'any' // Set this to 'any' to prevent network-related issues
           );
           
-          let signer: ethers.Signer;
-          let balance: string = '0.00';
+          // Safely create signer - don't call getAddress() which may not be supported
+          let signer;
+          try {
+            signer = provider.getSigner();
+          } catch (signerError) {
+            console.warn('Could not get standard signer, using fallback', signerError);
+            // Create a custom signer that doesn't require getAddress
+            const standardSigner = provider.getSigner();
+            signer = standardSigner;
+            
+            // Override the getAddress method if needed
+            // Using type casting to avoid TypeScript errors
+            (signer as any).getAddress = () => Promise.resolve(address as string);
+          }
           
-          if (isSeiGlobalWallet) {
-            console.log('🌟 Sei Global Wallet detected, using specialized adapter');
-            // Use our specialized adapter for Sei Global Wallet
-            const seiAdapter = createSeiWalletAdapter(window.ethereum, address);
-            signer = seiAdapter.getSigner();
-            
-            try {
-              // Get balance using the adapter's safe method
-              balance = await seiAdapter.getBalance();
-            } catch (balanceError) {
-              console.warn('Error getting Sei wallet balance, using wagmi balance');
-              if (wagmiBalance) {
-                balance = ethers.utils.formatEther(wagmiBalance.value.toString());
-              }
-            }
+          let balance: string;
+          if (wagmiBalance) {
+            balance = ethers.utils.formatEther(wagmiBalance.value.toString());
           } else {
-            // Standard wallet implementation
-            const provider = new ethers.providers.Web3Provider(
-              window.ethereum as unknown as ExtendedProvider, 
-              'any' // Set this to 'any' to prevent network-related issues
-            );
-            
             try {
-              signer = provider.getSigner();
-            } catch (signerError) {
-              console.warn('Could not get standard signer, using fallback', signerError);
-              const standardSigner = provider.getSigner();
-              signer = standardSigner;
-              
-              // Override the getAddress method if needed
-              (signer as any).getAddress = () => Promise.resolve(address as string);
-            }
-            
-            if (wagmiBalance) {
-              balance = ethers.utils.formatEther(wagmiBalance.value.toString());
-            } else {
-              try {
-                const ethersBalance = await provider.getBalance(address);
-                balance = ethers.utils.formatEther(ethersBalance);
-              } catch (balanceError) {
-                console.warn('Error getting balance, using 0', balanceError);
-              }
+              const ethersBalance = await provider.getBalance(address);
+              balance = ethers.utils.formatEther(ethersBalance);
+            } catch (balanceError) {
+              console.warn('Error getting balance, using 0', balanceError);
+              balance = '0.00';
             }
           }
           

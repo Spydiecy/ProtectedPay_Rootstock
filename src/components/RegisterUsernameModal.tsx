@@ -42,29 +42,19 @@ const RegisterUsernameModal: React.FC<RegisterUsernameModalProps> = ({
         return;
       }
 
-      // Register the username with the new return format
-      const registrationResult = await registerUsername(signer, username);
-      
-      if (!registrationResult.success) {
-        console.error('Registration error:', registrationResult.message || 'Unknown error');
-        setError(registrationResult.message || 'Failed to register username. Please try again.');
-        setIsSubmitting(false);
-        return;
-      }
+      // Register the username
+      await registerUsername(signer, username);
       
       // Verify registration was successful
-      const userResult = await getUserByAddress(signer, address);
-      
-      if (userResult.success && userResult.data?.username === username) {
-        console.log('Username registered successfully:', username);
+      const registeredUser = await getUserByAddress(signer, address);
+      if (registeredUser === username) {
         onSuccess(username);
         onClose();
       } else {
-        console.warn('Registration verification failed. User data:', userResult);
-        setError('Registration verification failed. Please check if your username was registered.');
+        setError('Registration failed. Please try again.');
       }
     } catch (error: any) {
-      console.error('Error in username registration process:', error);
+      console.error('Error registering username:', error);
       setError(error.message || 'Failed to register username. Please try again.');
     } finally {
       setIsSubmitting(false);
