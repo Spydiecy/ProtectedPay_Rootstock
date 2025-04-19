@@ -286,14 +286,7 @@ const Navbar = () => {
 
 const ChainSlider = () => {
   const chains = [
-    { name: 'Electroneum', icon: '/chains/electroneum.png' },
-    { name: 'NeoX', icon: '/chains/neox.png' },
-    { name: 'EduChain', icon: '/chains/educhain.png' },
-    { name: 'Ancient8', icon: '/chains/ancient8.png' },
-    { name: 'Mantle', icon: '/chains/mantle.png' },
-    { name: 'Kaia', icon: '/chains/kaia.png' },
-    { name: 'Linea', icon: '/chains/linea.png' },
-    { name: 'Creator', icon: '/chains/creator.png' },
+    { name: 'Sei', icon: '/chains/sei.png' },
   ];
 
   return (

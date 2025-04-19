@@ -13,7 +13,7 @@ interface QRModalProps {
 const QRModal: React.FC<QRModalProps> = ({ isOpen, onClose, username, address }) => {
   const qrRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -46,33 +46,134 @@ const QRModal: React.FC<QRModalProps> = ({ isOpen, onClose, username, address })
   };
 
   const handleDownload = () => {
-    const svg = qrRef.current?.querySelector('svg');
-    if (!svg) return;
-
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-
-    img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      if (ctx) {
-        // Use a variable background color to support both dark and light mode
-        ctx.fillStyle = 'rgb(var(--background))';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0);
+    try {
+      // Let's use the SVG QR code that's already in the DOM
+      const svgElement = qrRef.current?.querySelector('svg');
+      if (!svgElement) {
+        throw new Error('Could not find QR code SVG');
       }
 
-      const pngFile = canvas.toDataURL('image/png');
-      const downloadLink = document.createElement('a');
-      downloadLink.download = `protectedpay-${username || address}.png`;
-      downloadLink.href = pngFile;
-      downloadLink.click();
-    };
+      // Create a new canvas directly
+      const canvas = document.createElement('canvas');
+      const qrSize = 1000; // Use a large size for good quality
+      canvas.width = qrSize;
+      canvas.height = qrSize;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        throw new Error('Could not create canvas context');
+      }
 
-    img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+      // Fill with white background
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, qrSize, qrSize);
+
+      // Create a clean SVG as base64 data URL
+      const svgData = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="${qrSize}" height="${qrSize}">
+          <rect width="${qrSize}" height="${qrSize}" fill="white"/>
+          <g transform="scale(${qrSize / 33})">
+            ${svgElement.innerHTML}
+          </g>
+        </svg>
+      `;
+      
+      // Convert SVG to Base64
+      const svgBase64 = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+      
+      // Create an image from SVG data URL
+      const qrImage = new Image();
+      qrImage.onload = () => {
+        // Draw the QR code image centered
+        const offset = 0;
+        ctx.drawImage(qrImage, offset, offset, qrSize - (offset * 2), qrSize - (offset * 2));
+        
+        // Add ProtectedPay logo in the center (optional)
+        const logoImage = new Image();
+        const logoSize = qrSize * 0.15;
+        
+        logoImage.onload = () => {
+          const logoX = (qrSize - logoSize) / 2;
+          const logoY = (qrSize - logoSize) / 2;
+          
+          // Draw white background for the logo
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(logoX, logoY, logoSize, logoSize);
+          
+          // Draw the logo
+          ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
+          
+          // Finally, download the canvas as PNG
+          downloadCanvasAsPng();
+        };
+        
+        logoImage.onerror = () => {
+          // Download without logo if it fails to load
+          downloadCanvasAsPng();
+        };
+        
+        // Try to load logo (will fall back if this fails)
+        logoImage.src = '/logo.png';
+        
+        // Function to download the canvas as PNG
+        function downloadCanvasAsPng() {
+          // Get the data URL
+          const dataUrl = canvas.toDataURL('image/png');
+          
+          // Create a temporary link and trigger download
+          const a = document.createElement('a');
+          a.href = dataUrl;
+          a.download = `protectedpay-${username || address}.png`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+      };
+      
+      // Handle errors
+      qrImage.onerror = () => {
+        console.error('Failed to load QR code image');
+        // Try direct download of SVG as fallback
+        const svgBlob = new Blob([svgData], { type: 'image/svg+xml' });
+        const svgUrl = URL.createObjectURL(svgBlob);
+        const a = document.createElement('a');
+        a.href = svgUrl;
+        a.download = `protectedpay-${username || address}.svg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(svgUrl);
+      };
+      
+      // Start loading the QR code image
+      qrImage.src = svgBase64;
+      
+    } catch (error) {
+      console.error('Failed to download QR code:', error);
+      
+      // Last resort fallback - use the real QR code directly
+      try {
+        const svgElement = qrRef.current?.querySelector('svg');
+        if (svgElement) {
+          const svgData = new XMLSerializer().serializeToString(svgElement);
+          const svgBlob = new Blob([svgData], { type: 'image/svg+xml' });
+          const svgUrl = URL.createObjectURL(svgBlob);
+          const a = document.createElement('a');
+          a.href = svgUrl;
+          a.download = `protectedpay-${username || address}.svg`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(svgUrl);
+        } else {
+          alert('Could not download QR code. Please try again.');
+        }
+      } catch (err) {
+        alert('Could not download QR code. Please try again.');
+      }
+    }
   };
+
+
 
   return (
     <AnimatePresence>
@@ -184,9 +285,12 @@ const QRModal: React.FC<QRModalProps> = ({ isOpen, onClose, username, address })
                 </div>
               </div>
             </div>
+
+
           </motion.div>
         </motion.div>
       )}
+
     </AnimatePresence>
   );
 };

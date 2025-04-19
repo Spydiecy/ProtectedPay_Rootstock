@@ -192,7 +192,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
     <>
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 p-4 bg-black/80 backdrop-blur-xl rounded-full border border-green-500/20 text-green-400 shadow-lg shadow-green-500/20 z-40 hover:bg-green-500/20 transition-colors"
+        className="fixed bottom-8 right-8 p-4 bg-[rgb(var(--background))]/80 backdrop-blur-xl rounded-full border border-[rgb(var(--primary))]/20 text-[rgb(var(--primary))] shadow-lg shadow-[rgb(var(--primary))]/20 z-40 hover:bg-[rgb(var(--primary))]/20 transition-colors"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         initial={{ opacity: 0, y: 20 }}
@@ -204,19 +204,19 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-black/95 backdrop-blur-lg z-50 flex flex-col"
+            className="fixed inset-0 bg-[rgb(var(--background))]/95 backdrop-blur-lg z-50 flex flex-col"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="p-4 flex justify-between items-center border-b border-green-500/20 bg-black/40">
-              <h2 className="text-lg font-semibold text-green-400">Scan QR Code</h2>
+            <div className="p-4 flex justify-between items-center border-b border-[rgb(var(--primary))]/20 bg-[rgb(var(--background))]/40">
+              <h2 className="text-lg font-semibold text-[rgb(var(--primary))]">Scan QR Code</h2>
               <div className="flex items-center space-x-4">
                 {isMobile && (
-                  <div className="flex rounded-lg overflow-hidden border border-green-500/20 bg-black/40">
+                  <div className="flex rounded-lg overflow-hidden border border-[rgb(var(--primary))]/20 bg-[rgb(var(--background))]/40">
                     <button
                       onClick={() => setIsCameraMode(true)}
-                      className={`p-2 ${isCameraMode ? 'bg-green-500/20 text-green-400' : 'text-green-400/60 hover:text-green-400'}`}
+                      className={`p-2 ${isCameraMode ? 'bg-[rgb(var(--primary))]/20 text-[rgb(var(--primary))]' : 'text-[rgb(var(--primary))]/60 hover:text-[rgb(var(--primary))]'}`}
                     >
                       <CameraIcon className="w-5 h-5" />
                     </button>
@@ -226,7 +226,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
                         setIsCameraMode(false);
                         triggerFileInput();
                       }}
-                      className={`p-2 ${!isCameraMode ? 'bg-green-500/20 text-green-400' : 'text-green-400/60 hover:text-green-400'}`}
+                      className={`p-2 ${!isCameraMode ? 'bg-[rgb(var(--primary))]/20 text-[rgb(var(--primary))]' : 'text-[rgb(var(--primary))]/60 hover:text-[rgb(var(--primary))]'}`}
                     >
                       <PhotoIcon className="w-5 h-5" />
                     </button>
@@ -236,7 +236,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
                   onClick={handleClose}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-2 rounded-lg text-green-400/60 hover:text-green-400"
+                  className="p-2 rounded-lg text-[rgb(var(--primary))]/60 hover:text-[rgb(var(--primary))]"
                 >
                   <XMarkIcon className="w-6 h-6" />
                 </motion.button>
@@ -247,11 +247,11 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
               {isMobile ? (
                 isCameraMode ? (
                   <div className="w-full max-w-sm mx-auto relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl blur-xl" />
-                    <div className="relative bg-black/50 p-4 rounded-2xl">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[rgb(var(--primary))]/20 to-[rgb(var(--primary))]/20 rounded-2xl blur-xl" />
+                    <div className="relative bg-[rgb(var(--background))]/50 p-4 rounded-2xl">
                       <div id="reader" className="overflow-hidden rounded-xl"></div>
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div className="w-64 h-64 border-2 border-green-400/50 rounded-lg"></div>
+                        <div className="w-64 h-64 border-2 border-[rgb(var(--primary))]/50 rounded-lg"></div>
                       </div>
                       
                       {/* Fixed buttons at bottom */}
@@ -263,7 +263,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
                             setIsCameraMode(false);
                             triggerFileInput();
                           }}
-                          className="p-4 bg-black/80 backdrop-blur-xl rounded-full border border-green-500/20 text-green-400 hover:bg-green-500/20 transition-colors"
+                          className="p-4 bg-[rgb(var(--background))]/80 backdrop-blur-xl rounded-full border border-[rgb(var(--primary))]/20 text-[rgb(var(--primary))] hover:bg-[rgb(var(--primary))]/20 transition-colors"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                         >
@@ -273,7 +273,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
                         {/* Close Button */}
                         <motion.button
                           onClick={handleClose}
-                          className="p-4 bg-black/80 backdrop-blur-xl rounded-full border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-colors"
+                          className="p-4 bg-[rgb(var(--background))]/80 backdrop-blur-xl rounded-full border border-[rgb(var(--destructive))]/20 text-[rgb(var(--destructive))] hover:bg-[rgb(var(--destructive))]/20 transition-colors"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                         >
@@ -281,7 +281,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
                         </motion.button>
                       </div>
                     </div>
-                    <p className="text-green-400 text-center mt-4 mb-24">
+                    <p className="text-[rgb(var(--primary))] text-center mt-4 mb-24">
                       Position the QR code within the frame
                     </p>
                   </div>
@@ -289,15 +289,15 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
                   <div className="w-full max-w-sm mx-auto relative">
                     <div
                       onClick={triggerFileInput}
-                      className="w-full p-8 border-2 border-dashed border-green-500/20 rounded-2xl cursor-pointer hover:border-green-500/40 transition-colors"
+                      className="w-full p-8 border-2 border-dashed border-[rgb(var(--primary))]/20 rounded-2xl cursor-pointer hover:border-[rgb(var(--primary))]/40 transition-colors"
                     >
                       <div className="flex flex-col items-center space-y-4">
                         {isProcessing ? (
-                          <ArrowPathIcon className="w-12 h-12 text-green-400 animate-spin" />
+                          <ArrowPathIcon className="w-12 h-12 text-[rgb(var(--primary))] animate-spin" />
                         ) : (
-                          <PhotoIcon className="w-12 h-12 text-green-400" />
+                          <PhotoIcon className="w-12 h-12 text-[rgb(var(--primary))]" />
                         )}
-                        <p className="text-green-400 font-medium text-center">
+                        <p className="text-[rgb(var(--primary))] font-medium text-center">
                           {isProcessing ? 'Processing...' : 'Select from gallery'}
                         </p>
                       </div>
@@ -305,7 +305,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
                     {/* Close button for uploader */}
                     <motion.button
                       onClick={handleClose}
-                      className="absolute -top-4 -right-4 p-2 bg-black/80 backdrop-blur-xl rounded-full border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-colors"
+                      className="absolute -top-4 -right-4 p-2 bg-[rgb(var(--background))]/80 backdrop-blur-xl rounded-full border border-[rgb(var(--destructive))]/20 text-[rgb(var(--destructive))] hover:bg-[rgb(var(--destructive))]/20 transition-colors"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                     >
@@ -317,15 +317,15 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
                 <div className="w-full max-w-sm mx-auto relative">
                   <div
                     onClick={triggerFileInput}
-                    className="w-full p-8 border-2 border-dashed border-green-500/20 rounded-2xl cursor-pointer hover:border-green-500/40 transition-colors"
+                    className="w-full p-8 border-2 border-dashed border-[rgb(var(--primary))]/20 rounded-2xl cursor-pointer hover:border-[rgb(var(--primary))]/40 transition-colors"
                   >
                     <div className="flex flex-col items-center space-y-4">
                       {isProcessing ? (
-                        <ArrowPathIcon className="w-12 h-12 text-green-400 animate-spin" />
+                        <ArrowPathIcon className="w-12 h-12 text-[rgb(var(--primary))] animate-spin" />
                       ) : (
-                        <PhotoIcon className="w-12 h-12 text-green-400" />
+                        <PhotoIcon className="w-12 h-12 text-[rgb(var(--primary))]" />
                       )}
-                      <p className="text-green-400 font-medium text-center">
+                      <p className="text-[rgb(var(--primary))] font-medium text-center">
                         {isProcessing ? 'Processing...' : 'Click to upload QR code'}
                       </p>
                     </div>
@@ -333,7 +333,7 @@ const QRScanner: React.FC<QRScannerProps> = ({ onScan, onError }) => {
                   {/* Close button for uploader */}
                   <motion.button
                     onClick={handleClose}
-                    className="absolute -top-4 -right-4 p-2 bg-black/80 backdrop-blur-xl rounded-full border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-colors"
+                    className="absolute -top-4 -right-4 p-2 bg-[rgb(var(--background))]/80 backdrop-blur-xl rounded-full border border-[rgb(var(--destructive))]/20 text-[rgb(var(--destructive))] hover:bg-[rgb(var(--destructive))]/20 transition-colors"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
