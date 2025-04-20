@@ -286,7 +286,8 @@ const Navbar = () => {
 
 const ChainSlider = () => {
   const chains = [
-    { name: 'Sei', icon: '/chains/sei.png' },
+    { name: 'Sei Testnet', icon: '/chains/sei.png', description: 'Experience the features in a test environment' },
+    { name: 'Sei Mainnet', icon: '/chains/sei.png', description: 'The production network for real transactions' },
   ];
 
   return (
@@ -300,147 +301,58 @@ const ChainSlider = () => {
           viewport={{ once: true }}
         >
           <span className="bg-gradient-to-r from-green-500 to-emerald-500 dark:from-green-400 dark:to-emerald-500 text-transparent bg-clip-text">
-            Multi-Chain Support
+            Supported Networks
           </span>
         </motion.h2>
         
         <motion.p
-          className="text-center text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8"
+          className="text-center text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-12"
           variants={fadeIn}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
         >
-          Send and receive funds seamlessly across multiple blockchain networks, all with the same secure interface
+          Send and receive funds seamlessly across these blockchain networks, all with the same secure interface
         </motion.p>
-      </div>
 
-      <div className="slider-container">
-        <div className="slider">
-          {/* Generate multiple copies for infinite scrolling effect */}
-          {[...Array(4)].map((_, copyIndex) => (
-            <React.Fragment key={`copy-${copyIndex}`}>
-              {chains.map((chain, index) => (
-                <div key={`chain-${copyIndex}-${index}`} className="slide">
-                  <div className="logo-wrapper group">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {chains.map((chain, index) => (
+              <motion.div
+                key={`chain-${index}`}
+                className="p-6 rounded-2xl backdrop-blur-sm border border-gray-200 dark:border-gray-800 bg-white/5 dark:bg-gray-900/20 hover:border-green-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/5"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 relative mr-4">
                     <Image
                       src={chain.icon}
                       alt={chain.name}
-                      width={80}
-                      height={80}
-                      className="logo-image transition-all duration-300 filter grayscale group-hover:grayscale-0 group-hover:scale-110"
+                      width={48}
+                      height={48}
+                      className="rounded-full"
                     />
-                    <div className="logo-name opacity-70 group-hover:opacity-100 group-hover:text-green-500 dark:group-hover:text-green-400">
-                      {chain.name}
-                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{chain.name}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{chain.description}</p>
                   </div>
                 </div>
-              ))}
-            </React.Fragment>
-          ))}
+                <div className="h-1 w-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mb-4"></div>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  {chain.name.includes('Testnet') 
+                    ? 'Perfect for developers and users who want to test the platform before using real funds.' 
+                    : 'Designed for production use with enhanced security and reliability.'}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
-      
-      <style jsx>{`
-        .slider-container {
-          position: relative;
-          overflow: hidden;
-          padding: 20px 0;
-          width: 100%;
-        }
-        
-        .slider-container::before,
-        .slider-container::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          width: 200px;
-          height: 100%;
-          z-index: 2;
-          pointer-events: none;
-        }
-        
-        .slider-container::before {
-          left: 0;
-          background: linear-gradient(to right, var(--slider-bg-start), var(--slider-bg-end));
-        }
-        
-        .slider-container::after {
-          right: 0;
-          background: linear-gradient(to left, var(--slider-bg-start), var(--slider-bg-end));
-        }
-        
-        .slider {
-          display: flex;
-          animation: scroll 60s linear infinite;
-          width: fit-content;
-        }
-        
-        .slider-container:hover .slider {
-          animation-play-state: paused;
-        }
-        
-        .slide {
-          flex: 0 0 auto;
-          width: 140px;
-          box-sizing: border-box;
-          padding: 0 10px;
-        }
-        
-        .logo-wrapper {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 10px;
-          border-radius: 12px;
-          background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(128, 128, 128, 0.2);
-          transition: all 0.3s ease;
-          cursor: pointer;
-          height: 120px;
-        }
-        
-        .logo-wrapper:hover {
-          border-color: rgba(74, 222, 128, 0.4);
-          transform: translateY(-5px);
-          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .logo-image {
-          width: 60px;
-          height: 60px;
-          object-fit: contain;
-        }
-        
-        .logo-name {
-          margin-top: 8px;
-          font-size: 14px;
-          text-align: center;
-          color: #6b7280;
-          transition: all 0.3s ease;
-        }
-        
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(calc(-140px * ${chains.length}));
-          }
-        }
-
-        :root {
-          --slider-bg-start: rgba(255, 255, 255, 1);
-          --slider-bg-end: rgba(255, 255, 255, 0);
-        }
-
-        :global(.dark) {
-          --slider-bg-start: rgba(0, 0, 0, 1);
-          --slider-bg-end: rgba(0, 0, 0, 0);
-        }
-      `}</style>
     </section>
   );
 };

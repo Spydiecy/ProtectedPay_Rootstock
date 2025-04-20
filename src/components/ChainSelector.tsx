@@ -156,7 +156,7 @@ const ChainSelector = () => {
   return (
     <div className="relative" ref={dropdownRef}>
       <motion.button
-        className="flex items-center justify-between space-x-2 px-3 py-2 rounded-xl bg-black/30 border border-green-500/20 hover:bg-black/40 transition-colors w-full md:w-auto min-w-[120px]"
+        className="flex items-center justify-between space-x-2 px-3 py-2 rounded-xl bg-gray-100/80 dark:bg-black/30 border border-gray-200 dark:border-green-500/20 hover:bg-gray-200/80 dark:hover:bg-black/40 transition-colors w-full md:w-auto min-w-[120px]"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -171,12 +171,12 @@ const ChainSelector = () => {
               className="rounded-full object-contain"
             />
           </div>
-          <span className="text-green-400 font-medium text-sm">
+          <span className="text-gray-800 dark:text-green-400 font-medium text-sm">
             {isMobile ? currentChain.symbol : currentChain.name}
           </span>
         </div>
         <ChevronDownIcon 
-          className={`w-4 h-4 text-green-400 transition-transform duration-200 ${
+          className={`w-4 h-4 text-gray-700 dark:text-green-400 transition-transform duration-200 ${
             isDropdownOpen ? 'rotate-180' : ''
           }`}
         />
@@ -187,7 +187,7 @@ const ChainSelector = () => {
           isMobile ? (
             // Mobile Dropdown - Improved scrollable design
             <motion.div
-              className="fixed inset-x-0 top-16 bottom-0 z-50 bg-black/95 backdrop-blur-xl"
+              className="fixed inset-x-0 top-16 bottom-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-xl"
               variants={mobileDropdownVariants}
               initial="hidden"
               animate="visible"
@@ -195,8 +195,8 @@ const ChainSelector = () => {
               transition={{ duration: 0.2 }}
             >
               <div className="flex flex-col h-full">
-                <div className="px-4 py-3 border-b border-green-500/20">
-                  <h3 className="text-green-400 font-medium text-lg">Select Network</h3>
+                <div className="px-4 py-3 border-b border-gray-200 dark:border-green-500/20">
+                  <h3 className="text-gray-800 dark:text-green-400 font-medium text-lg">Select Network</h3>
                 </div>
                 
                 <div className="flex-1 overflow-y-auto scrollbar-hide">
@@ -207,8 +207,8 @@ const ChainSelector = () => {
                         onClick={() => handleSwitchNetwork(chain)}
                         className={`w-full px-4 py-3 flex items-center space-x-3 rounded-xl border ${
                           chain.id === currentChainId 
-                            ? 'border-green-500/30 bg-green-500/5 text-green-400' 
-                            : 'border-transparent text-gray-400 active:bg-green-500/5'
+                            ? 'border-green-500/30 bg-green-50 dark:bg-green-500/5 text-green-600 dark:text-green-400' 
+                            : 'border-gray-100 dark:border-transparent text-gray-600 dark:text-gray-400 active:bg-gray-50 dark:active:bg-green-500/5'
                         } ${isSwitching ? 'opacity-50' : ''}`}
                         disabled={isSwitching}
                         whileTap={{ scale: 0.98 }}
@@ -236,10 +236,10 @@ const ChainSelector = () => {
                   </div>
                 </div>
                 
-                <div className="p-4 border-t border-green-500/20">
+                <div className="p-4 border-t border-gray-200 dark:border-green-500/20">
                   <button
                     onClick={() => setIsDropdownOpen(false)}
-                    className="w-full py-3 px-4 rounded-xl bg-green-500/10 text-green-400 font-medium active:bg-green-500/20"
+                    className="w-full py-3 px-4 rounded-xl bg-gray-100 dark:bg-green-500/10 text-gray-800 dark:text-green-400 font-medium active:bg-gray-200 dark:active:bg-green-500/20"
                   >
                     Close
                   </button>
@@ -249,20 +249,24 @@ const ChainSelector = () => {
           ) : (
             // Desktop Dropdown
             <motion.div
+              className="absolute top-full right-0 mt-2 z-50 w-56 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden"
               variants={desktopDropdownVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-              transition={{ duration: 0.2 }}
-              className="absolute right-0 mt-2 w-64 rounded-xl bg-black/95 backdrop-blur-xl border border-green-500/20 shadow-xl overflow-hidden z-50"
+              transition={{ duration: 0.15 }}
             >
+              <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800">
+                <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">Select Network</h3>
+              </div>
+              
               <div className="py-2 max-h-96 overflow-y-auto scrollbar-hide">
                 {supportedChains.map((chain) => (
                   <motion.button
                     key={chain.id}
                     onClick={() => handleSwitchNetwork(chain)}
                     className={`w-full px-4 py-2 flex items-center space-x-3 ${
-                      chain.id === currentChainId ? 'text-green-400 bg-green-500/5' : 'text-gray-400 hover:bg-green-500/10'
+                      chain.id === currentChainId ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-500/5' : 'text-gray-700 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-green-500/10'
                     } ${isSwitching ? 'opacity-50' : ''}`}
                     whileHover={{ x: 4 }}
                     disabled={isSwitching}
