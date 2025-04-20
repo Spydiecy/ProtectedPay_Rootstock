@@ -44,31 +44,104 @@ const ProfileQR: React.FC<ProfileQRProps> = ({ username, address, onClose }) => 
   };
 
   const handleDownload = () => {
-    const svg = qrRef.current?.querySelector('svg');
-    if (!svg) return;
-
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-
-    img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      if (ctx) {
-        ctx.fillStyle = '#111111';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0);
-      }
-
-      const pngFile = canvas.toDataURL('image/png');
-      const downloadLink = document.createElement('a');
-      downloadLink.download = `protectedpay-${username}.png`;
-      downloadLink.href = pngFile;
-      downloadLink.click();
-    };
-
-    img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+    try {
+      // Get the QR data and create a new QR code with white background for downloading
+      const qrSize = 1000; // Large size for better quality
+      
+      // Create a temporary container for a new QR code
+      const tempContainer = document.createElement('div');
+      document.body.appendChild(tempContainer);
+      
+      // Render a temporary QR code with white background for download
+      const tempQR = document.createElement('div');
+      tempContainer.appendChild(tempQR);
+      
+      // Create a new QR code instance specifically for download (with white background)
+      const qrForDownload = (
+        <QRCodeSVG
+          value={qrData}
+          size={qrSize}
+          level="H"
+          includeMargin={true}
+          bgColor="#FFFFFF"
+          fgColor="#10B981"
+          imageSettings={{
+            src: "/logo.png",
+            height: Math.floor(qrSize * 0.15),
+            width: Math.floor(qrSize * 0.15),
+            excavate: true,
+          }}
+        />
+      );
+      
+      // Render the QR code to the temp container
+      const root = document.createElement('div');
+      tempContainer.appendChild(root);
+      
+      // Use ReactDOM to render the QR code
+      const ReactDOM = require('react-dom');
+      ReactDOM.render(qrForDownload, root);
+      
+      // Wait for the QR code to render
+      setTimeout(() => {
+        try {
+          // Get the SVG from the rendered QR code
+          const svg = root.querySelector('svg');
+          if (!svg) throw new Error('No SVG found');
+          
+          // Create a canvas with white background
+          const canvas = document.createElement('canvas');
+          canvas.width = qrSize;
+          canvas.height = qrSize;
+          
+          const ctx = canvas.getContext('2d');
+          if (!ctx) throw new Error('Could not get canvas context');
+          
+          // Fill with white background
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, qrSize, qrSize);
+          
+          // Convert SVG to data URL
+          const svgData = new XMLSerializer().serializeToString(svg);
+          const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+          const svgUrl = URL.createObjectURL(svgBlob);
+          
+          // Load the SVG as an image
+          const img = new Image();
+          img.onload = () => {
+            // Draw the QR code on the canvas
+            ctx.drawImage(img, 0, 0, qrSize, qrSize);
+            
+            // Export as PNG
+            const pngUrl = canvas.toDataURL('image/png');
+            
+            // Create download link
+            const downloadLink = document.createElement('a');
+            downloadLink.download = `protectedpay-${username}.png`;
+            downloadLink.href = pngUrl;
+            downloadLink.click();
+            
+            // Clean up
+            URL.revokeObjectURL(svgUrl);
+            document.body.removeChild(tempContainer);
+          };
+          
+          img.onerror = (err) => {
+            console.error('Error loading QR code image:', err);
+            URL.revokeObjectURL(svgUrl);
+            document.body.removeChild(tempContainer);
+          };
+          
+          img.src = svgUrl;
+        } catch (err) {
+          console.error('Error generating QR code:', err);
+          document.body.removeChild(tempContainer);
+        }
+      }, 100);
+    } catch (err) {
+      console.error('Failed to generate QR code:', err);
+      alert('Could not download QR code. Please try again.');
+    }
   };
 
   return (

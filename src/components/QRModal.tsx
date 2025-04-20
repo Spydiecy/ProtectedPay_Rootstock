@@ -47,133 +47,132 @@ const QRModal: React.FC<QRModalProps> = ({ isOpen, onClose, username, address })
 
   const handleDownload = () => {
     try {
-      // Let's use the SVG QR code that's already in the DOM
-      const svgElement = qrRef.current?.querySelector('svg');
-      if (!svgElement) {
-        throw new Error('Could not find QR code SVG');
-      }
-
-      // Create a new canvas directly
-      const canvas = document.createElement('canvas');
-      const qrSize = 1000; // Use a large size for good quality
-      canvas.width = qrSize;
-      canvas.height = qrSize;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) {
-        throw new Error('Could not create canvas context');
-      }
-
-      // Fill with white background
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fillRect(0, 0, qrSize, qrSize);
-
-      // Create a clean SVG as base64 data URL
-      const svgData = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="${qrSize}" height="${qrSize}">
-          <rect width="${qrSize}" height="${qrSize}" fill="white"/>
-          <g transform="scale(${qrSize / 33})">
-            ${svgElement.innerHTML}
-          </g>
-        </svg>
-      `;
+      // Get the QR data and create a new QR code with white background for downloading
+      const qrSize = 1000; // Large size for better quality
       
-      // Convert SVG to Base64
-      const svgBase64 = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+      // Create a temporary container for a new QR code
+      const tempContainer = document.createElement('div');
+      document.body.appendChild(tempContainer);
       
-      // Create an image from SVG data URL
-      const qrImage = new Image();
-      qrImage.onload = () => {
-        // Draw the QR code image centered
-        const offset = 0;
-        ctx.drawImage(qrImage, offset, offset, qrSize - (offset * 2), qrSize - (offset * 2));
-        
-        // Add ProtectedPay logo in the center (optional)
-        const logoImage = new Image();
-        const logoSize = qrSize * 0.15;
-        
-        logoImage.onload = () => {
-          const logoX = (qrSize - logoSize) / 2;
-          const logoY = (qrSize - logoSize) / 2;
+      // Create a new QR code instance specifically for download (with white background)
+      const qrForDownload = (
+        <QRCodeSVG
+          value={qrData}
+          size={qrSize}
+          level="H"
+          includeMargin={true}
+          bgColor="#FFFFFF"
+          fgColor="rgb(var(--primary))"
+          imageSettings={{
+            src: "/logo.png",
+            height: Math.floor(qrSize * 0.15),
+            width: Math.floor(qrSize * 0.15),
+            excavate: true,
+          }}
+        />
+      );
+      
+      // Render the QR code to the temp container
+      const root = document.createElement('div');
+      tempContainer.appendChild(root);
+      
+      // Use ReactDOM to render the QR code
+      const ReactDOM = require('react-dom');
+      ReactDOM.render(qrForDownload, root);
+      
+      // Wait for the QR code to render
+      setTimeout(() => {
+        try {
+          // Get the SVG from the rendered QR code
+          const svg = root.querySelector('svg');
+          if (!svg) throw new Error('No SVG found');
           
-          // Draw white background for the logo
+          // Create a canvas with white background
+          const canvas = document.createElement('canvas');
+          canvas.width = qrSize;
+          canvas.height = qrSize;
+          
+          const ctx = canvas.getContext('2d');
+          if (!ctx) throw new Error('Could not get canvas context');
+          
+          // Fill with white background
           ctx.fillStyle = '#FFFFFF';
-          ctx.fillRect(logoX, logoY, logoSize, logoSize);
+          ctx.fillRect(0, 0, qrSize, qrSize);
           
-          // Draw the logo
-          ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
+          // Convert SVG to data URL
+          const svgData = new XMLSerializer().serializeToString(svg);
+          const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+          const svgUrl = URL.createObjectURL(svgBlob);
           
-          // Finally, download the canvas as PNG
-          downloadCanvasAsPng();
-        };
-        
-        logoImage.onerror = () => {
-          // Download without logo if it fails to load
-          downloadCanvasAsPng();
-        };
-        
-        // Try to load logo (will fall back if this fails)
-        logoImage.src = '/logo.png';
-        
-        // Function to download the canvas as PNG
-        function downloadCanvasAsPng() {
-          // Get the data URL
-          const dataUrl = canvas.toDataURL('image/png');
+          // Load the SVG as an image
+          const img = new Image();
+          img.onload = () => {
+            // Draw the QR code on the canvas
+            ctx.drawImage(img, 0, 0, qrSize, qrSize);
+            
+            // Add logo in the center (optional)
+            const logoImage = new Image();
+            const logoSize = qrSize * 0.15;
+            
+            logoImage.onload = () => {
+              const logoX = (qrSize - logoSize) / 2;
+              const logoY = (qrSize - logoSize) / 2;
+              
+              // Draw white background for the logo
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(logoX, logoY, logoSize, logoSize);
+              
+              // Draw the logo
+              ctx.drawImage(logoImage, logoX, logoY, logoSize, logoSize);
+              
+              // Finally, download the canvas as PNG
+              downloadCanvasAsPng();
+            };
+            
+            logoImage.onerror = () => {
+              // Download without logo if it fails to load
+              downloadCanvasAsPng();
+            };
+            
+            // Try to load logo (will fall back if this fails)
+            logoImage.src = '/logo.png';
+            
+            // Function to download the canvas as PNG
+            function downloadCanvasAsPng() {
+              // Get the data URL
+              const dataUrl = canvas.toDataURL('image/png');
+              
+              // Create a temporary link and trigger download
+              const a = document.createElement('a');
+              a.href = dataUrl;
+              a.download = `protectedpay-${username || address}.png`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              
+              // Clean up
+              URL.revokeObjectURL(svgUrl);
+              document.body.removeChild(tempContainer);
+            }
+          };
           
-          // Create a temporary link and trigger download
-          const a = document.createElement('a');
-          a.href = dataUrl;
-          a.download = `protectedpay-${username || address}.png`;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
+          img.onerror = (err) => {
+            console.error('Error loading QR code image:', err);
+            URL.revokeObjectURL(svgUrl);
+            document.body.removeChild(tempContainer);
+          };
+          
+          img.src = svgUrl;
+        } catch (err) {
+          console.error('Error generating QR code:', err);
+          document.body.removeChild(tempContainer);
         }
-      };
-      
-      // Handle errors
-      qrImage.onerror = () => {
-        console.error('Failed to load QR code image');
-        // Try direct download of SVG as fallback
-        const svgBlob = new Blob([svgData], { type: 'image/svg+xml' });
-        const svgUrl = URL.createObjectURL(svgBlob);
-        const a = document.createElement('a');
-        a.href = svgUrl;
-        a.download = `protectedpay-${username || address}.svg`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(svgUrl);
-      };
-      
-      // Start loading the QR code image
-      qrImage.src = svgBase64;
-      
+      }, 100);
     } catch (error) {
       console.error('Failed to download QR code:', error);
-      
-      // Last resort fallback - use the real QR code directly
-      try {
-        const svgElement = qrRef.current?.querySelector('svg');
-        if (svgElement) {
-          const svgData = new XMLSerializer().serializeToString(svgElement);
-          const svgBlob = new Blob([svgData], { type: 'image/svg+xml' });
-          const svgUrl = URL.createObjectURL(svgBlob);
-          const a = document.createElement('a');
-          a.href = svgUrl;
-          a.download = `protectedpay-${username || address}.svg`;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(svgUrl);
-        } else {
-          alert('Could not download QR code. Please try again.');
-        }
-      } catch (err) {
-        alert('Could not download QR code. Please try again.');
-      }
+      alert('Could not download QR code. Please try again.');
     }
   };
-
-
 
   return (
     <AnimatePresence>
