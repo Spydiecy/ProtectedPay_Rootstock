@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 
 const CONTRACT_ADDRESSES = {
 	1328: '0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6', // Sei Testnet
+	1329: '0x74689f77e03D8213DF5037b681F05b80bAAe3504', // Sei Mainnet
 } as const;
   
 const CONTRACT_ABI = [

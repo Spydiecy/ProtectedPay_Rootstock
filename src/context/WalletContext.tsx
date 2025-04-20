@@ -50,7 +50,33 @@ const seiTestnet = {
   testnet: true,
 } as const;
 
-const chains = [seiTestnet] as const; 
+const seiMainnet = {
+  id: 1329,
+  name: 'Sei Mainnet',
+  network: 'sei-mainnet',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'SEI',
+    symbol: 'SEI',
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://evm-rpc.sei-apis.com']
+    },
+    public: {
+      http: ['https://evm-rpc.sei-apis.com']
+    }
+  },
+  blockExplorers: {
+    default: {
+      name: 'Sei Stream',
+      url: 'https://seistream.app'
+    }
+  },
+  testnet: false,
+} as const;
+
+const chains = [seiTestnet, seiMainnet] as const; 
 
 const projectId = 'b8ad206ba9492e6096fa0aa0f868586c';
 
@@ -71,6 +97,7 @@ const wagmiConfig = createConfig({
   chains,
   transports: {
     [seiTestnet.id]: http(),
+    [seiMainnet.id]: http(),
   },
 });
 

@@ -24,6 +24,15 @@ export const supportedChains: ChainInfo[] = [
     rpcUrl: 'https://evm-rpc-testnet.sei-apis.com',
     blockExplorerUrl: 'https://seitrace.com'
   },
+  {
+    id: 1329,
+    hexId: '0x531',
+    name: 'Sei Mainnet',
+    icon: '/chains/sei.png',
+    symbol: 'SEI',
+    rpcUrl: 'https://evm-rpc.sei-apis.com',
+    blockExplorerUrl: 'https://seistream.app'
+  },
 ] as const
 
 const ChainSelector = () => {

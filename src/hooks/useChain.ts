@@ -9,6 +9,7 @@ export interface ChainInfo {
 
 // Map of chain IDs to their native tokens
 const TOKEN_MAP: Record<number, string> = {
+  1329: "SEI", // Sei Mainnet
   1328: "SEI", // Sei
   1: "ETH", // Ethereum
   5: "ETH", // Goerli
