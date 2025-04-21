@@ -23,7 +23,7 @@
 
 ### 🛡️ Protected Transfers on Sei
 
-<img align="right" src="https://github.com/user-attachments/assets/bdb20bd8-fa93-488a-b720-46615b9918de" width="350px">
+<img align="right" src="https://github.com/user-attachments/assets/c5c1630d-0ace-4a95-a0ab-075d00605311" width="350px">
 
 - **Escrow-Like Protection**: Funds remain secure until claimed by recipient
 - **Refundable Transfers**: Easily recover funds if sent to the wrong address
@@ -37,7 +37,7 @@
 
 ### 👥 Group Payments
 
-<img align="right" src="https://github.com/user-attachments/assets/56141ff7-ad4b-4a1e-bfac-5abdd92b22a9" width="350px">
+<img align="right" src="https://github.com/user-attachments/assets/26daca67-e41d-49ea-8203-369f8afc9249" width="350px">
 
 - **Split Expenses Easily**: Divide costs among friends or colleagues
 - **Simple Contributors**: Accept payments from any Sei user
@@ -50,7 +50,7 @@
 
 ### 💰 Savings Pots
 
-<img align="right" src="https://github.com/user-attachments/assets/4c88cdb7-d21c-4d1e-863f-53d063830e19" width="350px">
+<img align="right" src="https://github.com/user-attachments/assets/ec386240-4093-4c25-bb63-21d6ede14e5c" width="350px">
 
 - **Goal-Based Savings**: Set targets and track progress visually
 - **Sei-Optimized**: Create dedicated savings on Sei network
@@ -74,7 +74,7 @@
 - **Instant Recognition**: Fast processing of payment information
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/f645759e-47bf-4fb1-9e87-b46f7c0bc6a7" width="400px">
+  <img src="https://github.com/user-attachments/assets/f09258a5-936c-4162-bf56-9a89835fdfe2" width="400px">
 </div>
 
 <br clear="right"/>
@@ -83,13 +83,18 @@
 
 ProtectedPay is built exclusively for the Sei blockchain ecosystem, delivering optimized functionality on both the testnet and mainnet environments.
 
-<div align="center">
+<div align="left">
   <table>
     <tr>
       <td align="center"><img src="/public/chains/sei.png" width="70px"><br><b>Sei Testnet</b></td>
       <td align="center"><img src="/public/chains/sei.png" width="70px"><br><b>Sei Mainnet</b></td>
     </tr>
   </table>
+</div>
+
+<div align="ledt">
+  <img src="https://github.com/user-attachments/assets/67edf085-97a7-443b-8f9b-48eb8351890f" width="700px">
+  <p><i>Comprehensive dashboard with activity tracking</i></p>
 </div>
 
 ## 🚀 How It Works
@@ -115,8 +120,8 @@ ProtectedPay is built exclusively for the Sei blockchain ecosystem, delivering o
 
 ## 💻 User Interface
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/c87a5393-76dd-4cde-9895-80481511cc2c" width="700px">
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/9dc7d205-f19f-4893-8e97-ff2918cd9708" width="700px">
   <p><i>Modern, intuitive interface with glassmorphism design</i></p>
 </div>
 
@@ -129,8 +134,8 @@ ProtectedPay is built exclusively for the Sei blockchain ecosystem, delivering o
 
 ### Dashboard Experience
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/21ce5262-c766-4a5a-bc5a-4b10f776188b" width="700px">
+<div align="ledt">
+  <img src="https://github.com/user-attachments/assets/7fbe5d00-b6e7-479d-9949-a4e9ef90e962" width="700px">
   <p><i>Comprehensive dashboard with activity tracking</i></p>
 </div>
 
@@ -152,7 +157,7 @@ ProtectedPay prioritizes security at every level:
 
 ## 📃 Deployed Contracts
 
-<div align="center">
+<div align="left">
   <table>
     <tr>
       <th>Network</th>
@@ -176,7 +181,7 @@ ProtectedPay prioritizes security at every level:
 
 See ProtectedPay in action:
 
-<div align="center">
+<div align="left">
   <a href="https://youtu.be/TJgnpVpa51c?si=ojjzXsVgQBj_BSGN">
     <img src="https://img.youtube.com/vi/TJgnpVpa51c/0.jpg" alt="ProtectedPay Demo Video" width="500px">
   </a>
