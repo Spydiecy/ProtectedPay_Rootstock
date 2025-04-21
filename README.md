@@ -3,15 +3,15 @@
 <div align="center">
   <img src="https://github.com/user-attachments/assets/eb3dbd55-6522-4d3b-b6f9-6ec63157e565" alt="ProtectedPay Logo" width="650px">
   
-  <h3>Smart. Secure Crypto Transfers</h3>
+  <h3>Smart. Secure Crypto Transfers on Sei Network</h3>
   
-  <p>A revolutionary DeFi platform for secure transfers, group payments, and smart savings on Sei Network.</p>
+  <p>A revolutionary DeFi platform for secure transfers, group payments, and smart savings, built exclusively for the Sei blockchain.</p>
 </div>
 
 ## 📋 Contents
 
 - [Features](#-features)
-- [Supported Blockchains](#-supported-blockchains)
+- [Supported Networks](#-supported-networks)
 - [How It Works](#-how-it-works)
 - [User Interface](#-user-interface)
 - [Security](#-security)
@@ -21,17 +21,17 @@
 
 ## ✨ Features
 
-### 🛡️ Protected Cross-Chain Transfers
+### 🛡️ Protected Transfers on Sei
 
 <img align="right" src="https://github.com/user-attachments/assets/bdb20bd8-fa93-488a-b720-46615b9918de" width="350px">
 
 - **Escrow-Like Protection**: Funds remain secure until claimed by recipient
-- **Sei Network Support**: Send assets seamlessly on the Sei blockchain
+- **Refundable Transfers**: Easily recover funds if sent to the wrong address
 - **Easy Identification**: Transfer using usernames instead of complex addresses
 - **Customizable Remarks**: Add notes to help identify your transfers
-- **Refund Safety Net**: Easily recover unclaimed funds
 - **QR Integration**: Scan to pay functionality for quick transfers
 - **Transaction Privacy**: Keep your transfer details confidential
+- **Sei-Native Speed**: Benefit from Sei's ultra-fast transaction finality
 
 <br clear="right"/>
 
@@ -40,7 +40,7 @@
 <img align="right" src="https://github.com/user-attachments/assets/56141ff7-ad4b-4a1e-bfac-5abdd92b22a9" width="350px">
 
 - **Split Expenses Easily**: Divide costs among friends or colleagues
-- **Simple Contributors**: Accept payments from any user on the Sei network
+- **Simple Contributors**: Accept payments from any Sei user
 - **Automatic Distribution**: Funds released when target amount is reached
 - **Real-Time Tracking**: Monitor contributions as they happen
 - **Transparent History**: View all group payment activity
@@ -53,25 +53,12 @@
 <img align="right" src="https://github.com/user-attachments/assets/4c88cdb7-d21c-4d1e-863f-53d063830e19" width="350px">
 
 - **Goal-Based Savings**: Set targets and track progress visually
-- **Chain-Specific Pots**: Create dedicated savings on each blockchain
+- **Sei-Optimized**: Create dedicated savings on Sei network
 - **Flexible Contributions**: Add funds on your own schedule
 - **Emergency Access**: Withdraw when needed without penalties
 - **Purpose Tracking**: Organize savings by specific goals or needs
-- **Yield Earning**: Option to earn yield on your savings, increasing chain TVL
+- **Yield Earning**: Option to earn yield on your savings, increasing Sei TVL
 - **Progress Visualization**: Watch your savings grow in real-time
-
-<br clear="right"/>
-
-### 🔄 Cross-Chain User Experience
-
-<img align="right" src="https://github.com/user-attachments/assets/35cbdaad-5e05-4dc6-9a13-18b2f0b4a919" width="350px">
-
-- **Universal Username**: One identity across all supported chains
-- **Unified Dashboard**: View all activities in a single interface
-- **Real-Time Balances**: Track your assets across all networks
-- **Chain-Aware Design**: UI adapts to the selected blockchain
-- **Seamless Switching**: Change networks without changing interfaces
-- **Comprehensive History**: View transactions across all chains
 
 <br clear="right"/>
 
@@ -92,25 +79,15 @@
 
 <br clear="right"/>
 
-## 🔗 Supported Blockchains
+## 🔗 Supported Networks
 
-ProtectedPay operates seamlessly across multiple blockchains, delivering consistent functionality regardless of your preferred network.
+ProtectedPay is built exclusively for the Sei blockchain ecosystem, delivering optimized functionality on both the testnet and mainnet environments.
 
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="/public/chains/electroneum.png" width="50px"><br><b>Electroneum</b></td>
-      <td align="center"><img src="/public/chains/educhain.png" width="50px"><br><b>EduChain</b></td>
-      <td align="center"><img src="/public/chains/neox.png" width="50px"><br><b>NeoX</b></td>
-      <td align="center"><img src="/public/chains/kaia.png" width="50px"><br><b>KAIA</b></td>
-      <td align="center"><img src="/public/chains/telos.png" width="50px"><br><b>Telos</b></td>
-    </tr>
-    <tr>
-      <td align="center"><img src="/public/chains/ancient8.png" width="50px"><br><b>Ancient8</b></td>
-      <td align="center"><img src="/public/chains/mantle.png" width="50px"><br><b>Mantle</b></td>
-      <td align="center"><img src="/public/chains/linea.png" width="50px"><br><b>Linea</b></td>
-      <td align="center"><img src="/public/chains/creator.png" width="50px"><br><b>Creator</b></td>
-      <td align="center"><img src="/public/chains/crossfi.png" width="50px"><br><b>CrossFi</b></td>
+      <td align="center"><img src="/public/chains/sei.png" width="70px"><br><b>Sei Testnet</b></td>
+      <td align="center"><img src="/public/chains/sei.png" width="70px"><br><b>Sei Mainnet</b></td>
     </tr>
   </table>
 </div>
@@ -119,21 +96,21 @@ ProtectedPay operates seamlessly across multiple blockchains, delivering consist
 
 ### Protected Transfers in 3 Simple Steps
 
-1. **Connect & Select**: Choose your blockchain network and connect your wallet
+1. **Connect Your Wallet**: Connect your Sei-compatible wallet to ProtectedPay
 2. **Enter Details**: Specify recipient (username, address, or QR scan) and amount
-3. **Confirm & Send**: The recipient securely claims funds when ready
+3. **Confirm & Send**: The recipient securely claims funds when ready, or you can refund if needed
 
 ### Group Payments Made Easy
 
 1. **Create Pool**: Set up a payment group with target amount and participants
-2. **Share & Collect**: Participants contribute from any supported chain
+2. **Share & Collect**: Participants contribute to the pool
 3. **Auto-Distribution**: Funds are automatically sent to the recipient when the target is reached
 
 ### Smart Savings Pots
 
-1. **Set Goals**: Choose a blockchain and set your savings target
+1. **Set Goals**: Set your savings target on Sei network
 2. **Contribute**: Add funds at your own pace with real-time progress tracking
-3. **Yield Option**: Opt to earn yield on your savings, helping grow both your funds and the chain's TVL
+3. **Yield Option**: Opt to earn yield on your savings, helping grow both your funds and Sei's TVL
 4. **Flexible Access**: Withdraw partially or completely whenever needed
 
 ## 💻 User Interface
@@ -145,7 +122,7 @@ ProtectedPay operates seamlessly across multiple blockchains, delivering consist
 
 ### Design Philosophy
 
-- **Chain-Responsive**: UI themes adapt to the selected blockchain
+- **Sei-Inspired**: UI themes designed to match Sei's branding
 - **Glassmorphism**: Modern, clean aesthetics with depth and transparency
 - **Responsive Layout**: Perfect experience on any device
 - **Intuitive Navigation**: Easily access all features with minimal learning curve
@@ -154,24 +131,24 @@ ProtectedPay operates seamlessly across multiple blockchains, delivering consist
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/21ce5262-c766-4a5a-bc5a-4b10f776188b" width="700px">
-  <p><i>Comprehensive dashboard with multi-chain activity tracking</i></p>
+  <p><i>Comprehensive dashboard with activity tracking</i></p>
 </div>
 
-- **Activity Feed**: Real-time updates across all chains
-- **Asset Overview**: Quick view of balances on each network
+- **Activity Feed**: Real-time updates of your transactions
+- **Asset Overview**: Quick view of your Sei balance
 - **Status Indicators**: Clear visual cues for transaction states
-- **Network Switching**: Seamlessly change blockchains within the interface
+- **Network Selection**: Seamlessly switch between Sei Testnet and Mainnet
 
 ## 🔒 Security
 
 ProtectedPay prioritizes security at every level:
 
-- **Smart Contract Safety**: Chain-specific contracts with rigorous security measures
+- **Smart Contract Safety**: Sei-optimized contracts with rigorous security measures
 - **Non-Custodial Architecture**: Users always maintain control of their funds
 - **Protected Transfers**: Built-in escrow functionality keeps funds secure
 - **QR Verification**: Thorough validation of all scanned payment codes
-- **Cross-Chain Safeguards**: Secure bridging between different blockchains
-- **Transparent Transactions**: Clear visibility of all operation stages
+- **Refundable Transactions**: Safety net for accidental transfers
+- **Transparent Operations**: Clear visibility of all transaction stages
 
 ## 📃 Deployed Contracts
 
@@ -183,58 +160,13 @@ ProtectedPay prioritizes security at every level:
       <th>Status</th>
     </tr>
     <tr>
-      <td><img src="/public/chains/electroneum.png" width="20"> Electrneum Mainnet</td>
+      <td><img src="/public/chains/sei.png" width="20"> Sei Mainnet</td>
       <td><code>0x186a621d17819788c9aa170065ff3bbEEF37E7B7</code></td>
       <td>✅ Active</td>
     </tr>
     <tr>
-      <td><img src="/public/chains/electroneum.png" width="20"> Electrneum Testnet</td>
+      <td><img src="/public/chains/sei.png" width="20"> Sei Testnet</td>
       <td><code>0xC27106b03AadbFFec555C64F461784fCE850A51b</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/educhain.png" width="20"> Educhain Testnet</td>
-      <td><code>0x03c4fb7563e593ca0625C1c64959AC56081785cE</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/ancient8.png" width="20"> Ancient8 Testnet</td>
-      <td><code>0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/neox.png" width="20"> NeoX Testnet</td>
-      <td><code>0xF93132d75c20EfeD556EC2Bc5aC777750665D3a9</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/mantle.png" width="20"> Mantle Testnet</td>
-      <td><code>0x74689f77e03D8213DF5037b681F05b80bAAe3504</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/kaia.png" width="20"> KAIA Testnet</td>
-      <td><code>0xca36dd890f987edce1d6d7c74fb9df627c216bf6</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/telos.png" width="20"> Telos Testnet</td>
-      <td><code>0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/linea.png" width="20"> Linea Testnet</td>
-      <td><code>0xd150d34976Ac00D5e892aDFE565ba47de11c2656</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/crossfi.png" width="20"> CrossFi Testnet</td>
-      <td><code>0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/creator.png" width="20"> Creator Testnet</td>
-      <td><code>0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6</code></td>
       <td>✅ Active</td>
     </tr>
   </table>
@@ -262,5 +194,5 @@ Need assistance or have questions? We're here to help:
 
 <div align="center">
   <p>© 2025 ProtectedPay</p>
-  <h3>Revolutionizing secure multi-chain asset management</h3>
+  <h3>Revolutionizing secure payments on the Sei Network</h3>
 </div>
