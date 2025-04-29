@@ -73,7 +73,7 @@ ProtectedPay is built exclusively for the Rootstock blockchain ecosystem, delive
 </div>
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/67edf085-97a7-443b-8f9b-48eb8351890f" width="700px">
+  <img src="https://github.com/user-attachments/assets/cc84f264-b49e-47bd-a8ea-c7dc037ad8fa" width="700px">
   <p><i>Comprehensive dashboard with activity tracking</i></p>
 </div>
 
@@ -88,7 +88,7 @@ ProtectedPay reimagines crypto transfers with a focus on security and simplicity
 5. **Social Features**: Create group payments with multiple contributors
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/56918338-872d-44d6-a333-fee8c53687fb" width="700px">
+  <img src="https://github.com/user-attachments/assets/35c87d28-e3a3-49a1-9759-cf5588006cf7" width="700px">
   <p><i>Protected transfer flow with escrow protection</i></p>
 </div>
 
@@ -104,7 +104,7 @@ ProtectedPay reimagines crypto transfers with a focus on security and simplicity
 ### Dashboard Experience
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/7fbe5d00-b6e7-479d-9949-a4e9ef90e962" width="700px">
+  <img src="https://github.com/user-attachments/assets/8a8d8a4b-3d15-49c4-9e5c-025a5a157677" width="700px">
   <p><i>Comprehensive dashboard with activity tracking</i></p>
 </div>
 
@@ -114,9 +114,10 @@ ProtectedPay reimagines crypto transfers with a focus on security and simplicity
 - **Network Selection**: Seamless Rootstock Testnet connectivity
 
 ### Mobile Responsiveness
+![image]()
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/83e4f97b-bc2b-4f4e-996d-01c11979e5d5" width="700px">
+  <img src="https://github.com/user-attachments/assets/5fbaade3-d17d-44ef-991f-4d840bc4f6b9" width="700px">
   <p><i>Fully responsive mobile interface</i></p>
 </div>
 
@@ -163,61 +164,15 @@ For complete details on our AI-assisted development process, including specific 
   </table>
 </div>
 
-## 🎬 Demo
-
-Watch our demonstration video to see ProtectedPay in action:
-
-<div align="left">
-  <a href="https://www.youtube.com/watch?v=DemoxXCFGTc">
-    <img src="https://github.com/user-attachments/assets/c703870c-a927-4f7b-a8fe-b59cbe80c787" width="700px">
-  </a>
-</div>
-
 ## 💻 Technical Stack
 
+- **Ai Tools**: Chatgpt, Claude AI, V0, Copilot
 - **Blockchain**: Rootstock Testnet
 - **Frontend**: Next.js, React, TypeScript
 - **Styling**: Tailwind CSS, Framer Motion
 - **Web3 Integration**: ethers.js, RainbowKit
 - **Smart Contracts**: Solidity
-- **Development Tools**: Hardhat, Alchemy
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 16+
-- npm or yarn
-- MetaMask or compatible wallet with Rootstock Testnet configured
-
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/ProtectedPay_Rootstock.git
-cd ProtectedPay_Rootstock
-```
-
-2. Install dependencies
-```bash
-npm install
-# or
-yarn install
-```
-
-3. Create a `.env.local` file with your API keys
-```
-NEXT_PUBLIC_ALCHEMY_API_KEY=your_alchemy_api_key
-NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_walletconnect_id
-```
-
-4. Start the development server
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+- **Development Tools**: Remix
 
 ### Connect to Rootstock Testnet
 
@@ -234,6 +189,5 @@ yarn dev
 
 Need help or have questions?
 
-- **Discord**: [Join our community](https://discord.gg/protectedpay)
 - **Twitter**: [@protectedpay](https://x.com/protectedpay)
-- **Email**: support@protectedpay.com
+- **Email**: tanishq@protectedpay.xyz
