@@ -49,6 +49,7 @@ const TOKEN_MAP: Record<number, string> = {
   66665: "CETH", // Creator Testnet
   5201420: "ETN", // Electroneum Testnet
   52014: "ETN", // Electroneum Mainnet
+  31: "tRBTC", // Rootstock Testnet
 };
 
 // Map of chain IDs to their names
@@ -91,6 +92,7 @@ const CHAIN_NAME_MAP: Record<number, string> = {
   66665: "Creator Testnet",
   5201420: "Electroneum Testnet",
   52014: "Electroneum Mainnet",
+  31: "Rootstock Testnet",
 };
 
 /**

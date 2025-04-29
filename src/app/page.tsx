@@ -286,8 +286,7 @@ const Navbar = () => {
 
 const ChainSlider = () => {
   const chains = [
-    { name: 'Sei Testnet', icon: '/chains/sei.png', description: 'Experience the features in a test environment' },
-    { name: 'Sei Mainnet', icon: '/chains/sei.png', description: 'The production network for real transactions' },
+    { name: 'Rootstock Testnet', icon: '/chains/rootstock.png', description: 'Experience the features on Rootstock test environment' },
   ];
 
   return (
@@ -312,11 +311,11 @@ const ChainSlider = () => {
           whileInView="animate"
           viewport={{ once: true }}
         >
-          Send and receive funds seamlessly across these blockchain networks, all with the same secure interface
+          Send and receive funds seamlessly on the Rootstock network with the same secure interface
         </motion.p>
 
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
             {chains.map((chain, index) => (
               <motion.div
                 key={`chain-${index}`}
@@ -325,29 +324,21 @@ const ChainSlider = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
               >
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 relative mr-4">
-                    <Image
+                <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
+                  <div className="w-16 h-16 relative flex-shrink-0">
+                    <Image 
                       src={chain.icon}
                       alt={chain.name}
-                      width={48}
-                      height={48}
-                      className="rounded-full"
+                      fill
+                      className="object-contain"
                     />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{chain.name}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{chain.description}</p>
+                  <div className="flex-1 text-center md:text-left">
+                    <h3 className="text-lg font-semibold mb-2">{chain.name}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{chain.description}</p>
                   </div>
                 </div>
-                <div className="h-1 w-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mb-4"></div>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">
-                  {chain.name.includes('Testnet') 
-                    ? 'Perfect for developers and users who want to test the platform before using real funds.' 
-                    : 'Designed for production use with enhanced security and reliability.'}
-                </p>
               </motion.div>
             ))}
           </div>

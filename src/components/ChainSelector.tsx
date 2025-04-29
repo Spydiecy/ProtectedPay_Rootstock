@@ -16,24 +16,15 @@ export interface ChainInfo {
 
 export const supportedChains: ChainInfo[] = [
   {
-    id: 1328,
-    hexId: '0x530',
-    name: 'Sei Testnet',
-    icon: '/chains/sei.png',
-    symbol: 'SEI',
-    rpcUrl: 'https://evm-rpc-testnet.sei-apis.com',
-    blockExplorerUrl: 'https://seitrace.com'
-  },
-  {
-    id: 1329,
-    hexId: '0x531',
-    name: 'Sei Mainnet',
-    icon: '/chains/sei.png',
-    symbol: 'SEI',
-    rpcUrl: 'https://evm-rpc.sei-apis.com',
-    blockExplorerUrl: 'https://seistream.app'
-  },
-] as const
+    id: 31,
+    hexId: '0x1F',
+    name: 'Rootstock Testnet',
+    icon: '/chains/rootstock.png',
+    symbol: 'tRBTC',
+    rpcUrl: 'https://public-node.testnet.rsk.co',
+    blockExplorerUrl: 'https://explorer.testnet.rootstock.io'
+  }
+]
 
 const ChainSelector = () => {
   const { isConnected } = useWallet()

@@ -3,9 +3,9 @@
 <div align="center">
   <img src="https://github.com/user-attachments/assets/eb3dbd55-6522-4d3b-b6f9-6ec63157e565" alt="ProtectedPay Logo" width="650px">
   
-  <h3>Smart. Secure Crypto Transfers on Sei Network</h3>
+  <h3>Smart. Secure Crypto Transfers on Rootstock Network</h3>
   
-  <p>A revolutionary DeFi platform for secure transfers, group payments, and smart savings, built exclusively for the Sei blockchain.</p>
+  <p>A revolutionary DeFi platform for secure transfers, group payments, and smart savings, built exclusively for the Rootstock blockchain.</p>
 </div>
 
 ## 📋 Contents
@@ -21,139 +21,82 @@
 
 ## ✨ Features
 
-### 🛡️ Protected Transfers on Sei
+ProtectedPay offers a complete suite of financial tools designed for everyday crypto users on Rootstock:
 
-<img align="right" src="https://github.com/user-attachments/assets/c5c1630d-0ace-4a95-a0ab-075d00605311" width="350px">
-
-- **Escrow-Like Protection**: Funds remain secure until claimed by recipient
-- **Refundable Transfers**: Easily recover funds if sent to the wrong address
-- **Easy Identification**: Transfer using usernames instead of complex addresses
-- **Customizable Remarks**: Add notes to help identify your transfers
-- **QR Integration**: Scan to pay functionality for quick transfers
-- **Transaction Privacy**: Keep your transfer details confidential
-- **Sei-Native Speed**: Benefit from Sei's ultra-fast transaction finality
-
-<br clear="right"/>
-
-### 👥 Group Payments
-
-<img align="right" src="https://github.com/user-attachments/assets/26daca67-e41d-49ea-8203-369f8afc9249" width="350px">
-
-- **Split Expenses Easily**: Divide costs among friends or colleagues
-- **Simple Contributors**: Accept payments from any Sei user
-- **Automatic Distribution**: Funds released when target amount is reached
-- **Real-Time Tracking**: Monitor contributions as they happen
-- **Transparent History**: View all group payment activity
-- **Flexible Participation**: Join existing payment groups with minimal setup
-
-<br clear="right"/>
-
-### 💰 Savings Pots
-
-<img align="right" src="https://github.com/user-attachments/assets/ec386240-4093-4c25-bb63-21d6ede14e5c" width="350px">
-
-- **Goal-Based Savings**: Set targets and track progress visually
-- **Sei-Optimized**: Create dedicated savings on Sei network
-- **Flexible Contributions**: Add funds on your own schedule
-- **Emergency Access**: Withdraw when needed without penalties
-- **Purpose Tracking**: Organize savings by specific goals or needs
-- **Yield Earning**: Option to earn yield on your savings, increasing Sei TVL
-- **Progress Visualization**: Watch your savings grow in real-time
-
-<br clear="right"/>
-
-### 📱 QR Code System
-
-<img align="right" src="https://github.com/user-attachments/assets/bc4e425b-d6f7-49b8-a4fe-8831ba9e5548" width="200px">
-
-- **Profile QR Codes**: Generate codes containing payment details
-- **In-App Scanner**: Scan QR codes via camera or image uploads
-- **Quick Transfers**: Auto-fill payment information from scanned codes
-- **Secure Verification**: Validate codes before processing payments
-- **Share Anywhere**: Easy to share via messenger or print
-- **Instant Recognition**: Fast processing of payment information
-
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/f09258a5-936c-4162-bf56-9a89835fdfe2" width="400px">
-</div>
-
-<br clear="right"/>
+- **Protected Transfers**: Send crypto with escrow protection until claimed
+- **Username Payments**: Pay to usernames instead of complex addresses
+- **Group Payments**: Split bills, collect funds and organize group activities
+- **Savings Pots**: Create personal savings goals with deadline motivation
+- **QR Code Integration**: Scan & pay seamlessly with mobile devices
+- **Refundable Transfers**: Get your money back if not claimed
 
 ## 🔗 Supported Networks
 
-ProtectedPay is built exclusively for the Sei blockchain ecosystem, delivering optimized functionality on both the testnet and mainnet environments.
+ProtectedPay is built exclusively for the Rootstock blockchain ecosystem, delivering optimized functionality on the testnet environment.
 
 <div align="left">
   <table>
     <tr>
-      <td align="center"><img src="/public/chains/sei.png" width="70px"><br><b>Sei Testnet</b></td>
-      <td align="center"><img src="/public/chains/sei.png" width="70px"><br><b>Sei Mainnet</b></td>
+      <td align="center"><img src="/public/chains/rootstock.png" width="70px"><br><b>Rootstock Testnet</b></td>
     </tr>
   </table>
 </div>
 
-<div align="ledt">
+<div align="left">
   <img src="https://github.com/user-attachments/assets/67edf085-97a7-443b-8f9b-48eb8351890f" width="700px">
   <p><i>Comprehensive dashboard with activity tracking</i></p>
 </div>
 
 ## 🚀 How It Works
 
-### Protected Transfers in 3 Simple Steps
+ProtectedPay reimagines crypto transfers with a focus on security and simplicity:
 
-1. **Connect Your Wallet**: Connect your Sei-compatible wallet to ProtectedPay
-2. **Enter Details**: Specify recipient (username, address, or QR scan) and amount
-3. **Confirm & Send**: The recipient securely claims funds when ready, or you can refund if needed
+1. **Escrow Mechanism**: When you send funds, they're held in a secure smart contract
+2. **Recipient Claims**: The recipient actively claims funds to complete transfer
+3. **Refund Option**: Senders can refund unclaimed transfers anytime
+4. **Identity Simplification**: Use usernames instead of complex addresses
+5. **Social Features**: Create group payments with multiple contributors
 
-### Group Payments Made Easy
-
-1. **Create Pool**: Set up a payment group with target amount and participants
-2. **Share & Collect**: Participants contribute to the pool
-3. **Auto-Distribution**: Funds are automatically sent to the recipient when the target is reached
-
-### Smart Savings Pots
-
-1. **Set Goals**: Set your savings target on Sei network
-2. **Contribute**: Add funds at your own pace with real-time progress tracking
-3. **Yield Option**: Opt to earn yield on your savings, helping grow both your funds and Sei's TVL
-4. **Flexible Access**: Withdraw partially or completely whenever needed
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/56918338-872d-44d6-a333-fee8c53687fb" width="700px">
+  <p><i>Protected transfer flow with escrow protection</i></p>
+</div>
 
 ## 💻 User Interface
 
-<div align="left">
-  <img src="https://github.com/user-attachments/assets/9dc7d205-f19f-4893-8e97-ff2918cd9708" width="700px">
-  <p><i>Modern, intuitive interface with glassmorphism design</i></p>
-</div>
-
 ### Design Philosophy
 
-- **Sei-Inspired**: UI themes designed to match Sei's branding
+- **Rootstock-Inspired**: UI themes designed to match Rootstock's ecosystem
 - **Glassmorphism**: Modern, clean aesthetics with depth and transparency
 - **Responsive Layout**: Perfect experience on any device
 - **Intuitive Navigation**: Easily access all features with minimal learning curve
 
 ### Dashboard Experience
 
-<div align="ledt">
+<div align="left">
   <img src="https://github.com/user-attachments/assets/7fbe5d00-b6e7-479d-9949-a4e9ef90e962" width="700px">
   <p><i>Comprehensive dashboard with activity tracking</i></p>
 </div>
 
 - **Activity Feed**: Real-time updates of your transactions
-- **Asset Overview**: Quick view of your Sei balance
+- **Asset Overview**: Quick view of your tRBTC balance
 - **Status Indicators**: Clear visual cues for transaction states
-- **Network Selection**: Seamlessly switch between Sei Testnet and Mainnet
+- **Network Selection**: Seamless Rootstock Testnet connectivity
+
+### Mobile Responsiveness
+
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/83e4f97b-bc2b-4f4e-996d-01c11979e5d5" width="700px">
+  <p><i>Fully responsive mobile interface</i></p>
+</div>
 
 ## 🔒 Security
 
-ProtectedPay prioritizes security at every level:
-
-- **Smart Contract Safety**: Sei-optimized contracts with rigorous security measures
-- **Non-Custodial Architecture**: Users always maintain control of their funds
-- **Protected Transfers**: Built-in escrow functionality keeps funds secure
-- **QR Verification**: Thorough validation of all scanned payment codes
-- **Refundable Transactions**: Safety net for accidental transfers
-- **Transparent Operations**: Clear visibility of all transaction stages
+- **Audited Contracts**: Smart contracts built with security as priority
+- **Escrow Protection**: Funds held until claimed, preventing irreversible mistakes
+- **Bitcoin-Backed Security**: Leveraging Rootstock's security model
+- **Username Verification**: Secure identity system without compromising privacy
+- **Open Source**: Transparent code available for community review
 
 ## 📃 Deployed Contracts
 
@@ -165,12 +108,7 @@ ProtectedPay prioritizes security at every level:
       <th>Status</th>
     </tr>
     <tr>
-      <td><img src="/public/chains/sei.png" width="20"> Sei Mainnet</td>
-      <td><code>0x186a621d17819788c9aa170065ff3bbEEF37E7B7</code></td>
-      <td>✅ Active</td>
-    </tr>
-    <tr>
-      <td><img src="/public/chains/sei.png" width="20"> Sei Testnet</td>
+      <td><img src="/public/chains/rootstock.png" width="20"> Rootstock Testnet</td>
       <td><code>0xC27106b03AadbFFec555C64F461784fCE850A51b</code></td>
       <td>✅ Active</td>
     </tr>
@@ -179,25 +117,18 @@ ProtectedPay prioritizes security at every level:
 
 ## 🎬 Demo
 
-See ProtectedPay in action:
+Watch our demonstration video to see ProtectedPay in action:
 
 <div align="left">
-  <a href="https://youtu.be/TJgnpVpa51c?si=ojjzXsVgQBj_BSGN">
-    <img src="https://img.youtube.com/vi/TJgnpVpa51c/0.jpg" alt="ProtectedPay Demo Video" width="500px">
+  <a href="https://www.youtube.com/watch?v=DemoxXCFGTc">
+    <img src="https://github.com/user-attachments/assets/c703870c-a927-4f7b-a8fe-b59cbe80c787" width="700px">
   </a>
-  <p><b>Click to watch the demo video</b></p>
 </div>
 
 ## 📞 Support
 
-Need assistance or have questions? We're here to help:
+Need help or have questions?
 
-- **Email**: [protectedpay.business@gmail.com](mailto:protectedpay.business@gmail.com)
-- **Report Issues**: [GitHub Issues](https://github.com/username/protectedpay/issues)
-
----
-
-<div align="center">
-  <p>© 2025 ProtectedPay</p>
-  <h3>Revolutionizing secure payments on the Sei Network</h3>
-</div>
+- **Discord**: [Join our community](https://discord.gg/protectedpay)
+- **Twitter**: [@protectedpay](https://x.com/protectedpay)
+- **Email**: support@protectedpay.com

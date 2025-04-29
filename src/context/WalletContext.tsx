@@ -14,8 +14,6 @@ import {
   darkTheme 
 } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
-// Import Sei Global Wallet for EIP-6963 discovery
-import '@sei-js/sei-global-wallet/eip6963';
 
 type ExtendedProvider = ethers.providers.ExternalProvider & {
   on: (event: string, callback: (...args: unknown[]) => void) => void;
@@ -24,59 +22,33 @@ type ExtendedProvider = ethers.providers.ExternalProvider & {
 };
 
 // Define chains
-const seiTestnet = {
-  id: 1328,
-  name: 'Sei Testnet',
-  network: 'sei-testnet',
+const rootstockTestnet = {
+  id: 31,
+  name: 'Rootstock Testnet',
+  network: 'rootstock-testnet',
   nativeCurrency: {
     decimals: 18,
-    name: 'SEI',
-    symbol: 'SEI',
+    name: 'tRBTC',
+    symbol: 'tRBTC',
   },
   rpcUrls: {
     default: {
-      http: ['https://evm-rpc-testnet.sei-apis.com']
+      http: ['https://public-node.testnet.rsk.co']
     },
     public: {
-      http: ['https://evm-rpc-testnet.sei-apis.com']
+      http: ['https://public-node.testnet.rsk.co']
     }
   },
   blockExplorers: {
     default: {
-      name: 'Sei Trace',
-      url: 'https://seitrace.com'
+      name: 'Rootstock Explorer',
+      url: 'https://explorer.testnet.rootstock.io'
     }
   },
   testnet: true,
 } as const;
 
-const seiMainnet = {
-  id: 1329,
-  name: 'Sei Mainnet',
-  network: 'sei-mainnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'SEI',
-    symbol: 'SEI',
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://evm-rpc.sei-apis.com']
-    },
-    public: {
-      http: ['https://evm-rpc.sei-apis.com']
-    }
-  },
-  blockExplorers: {
-    default: {
-      name: 'Sei Stream',
-      url: 'https://seistream.app'
-    }
-  },
-  testnet: false,
-} as const;
-
-const chains = [seiTestnet, seiMainnet] as const; 
+const chains = [rootstockTestnet] as const; 
 
 const projectId = 'b8ad206ba9492e6096fa0aa0f868586c';
 
@@ -96,8 +68,7 @@ const wagmiConfig = createConfig({
   connectors,
   chains,
   transports: {
-    [seiTestnet.id]: http(),
-    [seiMainnet.id]: http(),
+    [rootstockTestnet.id]: http(),
   },
 });
 

@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 const CONTRACT_ADDRESSES = {
 	1328: '0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6', // Sei Testnet
 	1329: '0x74689f77e03D8213DF5037b681F05b80bAAe3504', // Sei Mainnet
+	31: '0xCa36dD890F987EDcE1D6D7C74Fb9df627c216BF6', // Rootstock Testnet
 } as const;
   
 const CONTRACT_ABI = [
@@ -1146,7 +1147,7 @@ interface TransferEvent {
   const getContractAddress = async (signer: ethers.Signer) => {
 	const chainId = await signer.getChainId();
 	return CONTRACT_ADDRESSES[chainId as keyof typeof CONTRACT_ADDRESSES] 
-	  || CONTRACT_ADDRESSES[1328]; // Default to Sei Testnet if chain not found
+	  || CONTRACT_ADDRESSES[31]; // Default to Rootstock Testnet if chain not found
   };
   
   // Contract instance getter with chain awareness
@@ -1535,10 +1536,16 @@ interface TransferEvent {
 		  symbol: 'SEI',
 		  decimals: 18
 		};
+	  case 31:
+		return {
+		  name: 'tRBTC',
+		  symbol: 'tRBTC',
+		  decimals: 18
+		};
 	  default:
 		return {
-		  name: 'SEI',
-		  symbol: 'SEI',
+		  name: 'tRBTC',
+		  symbol: 'tRBTC',
 		  decimals: 18
 		};
 	}
@@ -1548,8 +1555,10 @@ interface TransferEvent {
 	switch (chainId) {
 	  case 1328:
 		return 'https://seitrace.com/';
+	  case 31:
+		return 'https://explorer.testnet.rootstock.io';
 	  default:
-		return 'https://seitrace.com/';
+		return 'https://explorer.testnet.rootstock.io';
 	}
   };
   

@@ -20,7 +20,7 @@ import {
 } from '@/utils/contract'
 import { ethers } from 'ethers';
 import { useChain } from '@/hooks/useChain';
-import SeiWalletInfo from '@/components/SeiWalletInfo';
+import RootstockWalletInfo from '@/components/RootstockWalletInfo';
 import RegisterUsernameModal from '@/components/RegisterUsernameModal';
 import QRModal from '@/components/QRModal';
 
@@ -281,8 +281,8 @@ export default function DashboardPage() {
                     </svg>
                   </button>
                 )}
-                {/* Display Sei Address */}
-                <SeiWalletInfo evmAddress={address} />
+                {/* Display Rootstock Address */}
+                <RootstockWalletInfo evmAddress={address} />
               </div>
               
               <div className="flex flex-wrap gap-3 mt-4 sm:mt-0">
